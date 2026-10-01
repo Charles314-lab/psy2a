@@ -1,0 +1,412 @@
+{
+  "meta": {
+    "titre": "Cahier de relecture du site PSY2A",
+    "sousTitre": "Document de travail pour le Dr. Ibrahim HAÏDARA",
+    "version": "1",
+    "date": "15 août 2026",
+    "note": "Reprend l'intégralité des textes du site, dans l'ordre d'apparition à l'écran."
+  },
+
+  "pages": [
+    {
+      "code": "GEN",
+      "titre": "Éléments présents sur toutes les pages",
+      "url": "En-tête (barre du haut) et pied de page (bas de page)",
+      "intro": "Ces éléments apparaissent à l'identique sur les 7 pages du site. Une modification ici s'applique partout.",
+      "sections": [
+        {
+          "titre": "Barre du haut (en-tête)",
+          "blocs": [
+            { "ref": "GEN-01", "label": "Nom de la marque, à côté du logo", "texte": "PSY2A", "source": "components/Header.astro" },
+            { "ref": "GEN-02", "label": "Sous-titre de la marque", "texte": "Maux · Aide · Yeux", "source": "components/Header.astro" },
+            { "ref": "GEN-03", "label": "Libellés du menu, dans l'ordre", "liste": ["Accueil", "Votre Psychologue", "Les Consultations", "Presse & TV", "Contact"], "source": "config/site.ts (primaryNav)" },
+            { "ref": "GEN-04", "label": "Bouton de l'en-tête", "texte": "Prendre rendez-vous", "source": "components/Header.astro" }
+          ]
+        },
+        {
+          "titre": "Coordonnées et informations reprises partout",
+          "blocs": [
+            { "ref": "GEN-05", "label": "Nom affiché du praticien", "texte": "Ibrahim HAÏDARA — Docteur en Psychologie", "source": "config/site.ts (practitionerName, practitionerTitle)" },
+            { "ref": "GEN-06", "label": "Phrase de présentation du site (utilisée pour le titre de l'onglet du navigateur)", "texte": "Toutes vos consultations en ligne", "source": "config/site.ts (tagline)" },
+            { "ref": "GEN-07", "label": "Téléphone affiché", "texte": "(+33) 6 62 25 20 38", "source": "config/site.ts (contact.phone)" },
+            { "ref": "GEN-08", "label": "Numéro WhatsApp (identique au téléphone aujourd'hui)", "texte": "+33 6 62 25 20 38", "source": "config/site.ts (contact.phoneHref)" },
+            { "ref": "GEN-09", "label": "Adresse e-mail affichée", "texte": "contact@psy2a.com", "source": "config/site.ts (contact.email)" },
+            { "ref": "GEN-10", "label": "Horaires affichés (page Consultations, page Contact et pied de page)", "texte": "Du lundi au samedi, uniquement sur rendez-vous", "source": "config/site.ts (hours)" },
+            { "ref": "GEN-11", "label": "Références professionnelles (affichées dans les mentions légales et le pied de page)", "paires": [["Numéro RPPS", "10008658899"], ["SIREN", "995 147 105"], ["SIRET", "995 147 105 00028"], ["Code APE", "96.09Z"], ["Autorisation", "Autorisation d'exercice de psychologue (diplôme étranger), Agence Régionale de Santé"]], "source": "config/site.ts (registration)" },
+            { "ref": "GEN-12", "label": "Liens vers les réseaux sociaux (icônes du pied de page)", "paires": [["Facebook", "https://web.facebook.com/psy2a/"], ["YouTube", "https://www.youtube.com/@psy2a1ercabinetdepsycholog43/videos"], ["LinkedIn", "https://www.linkedin.com/in/dr-ibrahim-haïdara-5700384/"]], "source": "config/site.ts (social)" }
+          ]
+        },
+        {
+          "titre": "Pied de page (bas de page)",
+          "blocs": [
+            { "ref": "GEN-13", "label": "Phrase de présentation, sous le logo", "texte": "Vos consultations à distance (enfants · ados · adultes · couples).", "source": "components/Footer.astro" },
+            { "ref": "GEN-14", "label": "Titres des colonnes du pied de page", "liste": ["Navigation", "Contact", "Informations"], "source": "components/Footer.astro" },
+            { "ref": "GEN-15", "label": "Bloc Informations", "texte": "Ibrahim HAÏDARA / Docteur en Psychologie / RPPS 10008658899 / Horaires : (voir GEN-10)", "source": "components/Footer.astro" },
+            { "ref": "GEN-16", "label": "Mention de bas de page", "texte": "© 2026 PSY2A. Tous droits réservés.", "note": "L'année se met à jour automatiquement.", "source": "components/Footer.astro" },
+            { "ref": "GEN-17", "label": "Liens légaux du bas de page", "liste": ["Mentions légales", "Politique de confidentialité"], "source": "components/Footer.astro" }
+          ]
+        }
+      ],
+      "images": [
+        "Logo (marque seule : l'œil et l'arbre) dans l'en-tête et dans le pied de page."
+      ]
+    },
+
+    {
+      "code": "ACC",
+      "titre": "Page 1, Accueil",
+      "url": "psy2a.com",
+      "intro": "C'est la première page que voit un visiteur. Les blocs sont listés de haut en bas de l'écran.",
+      "sections": [
+        {
+          "titre": "Grande bannière d'ouverture (haut de la page)",
+          "blocs": [
+            { "ref": "ACC-01", "label": "Petit texte au-dessus du titre", "texte": "Psychologue en ligne", "source": "pages/index.astro" },
+            { "ref": "ACC-02", "label": "Titre principal du site (le plus visible)", "texte": "Nous construirons pas à pas vos forces.", "source": "pages/index.astro" },
+            { "ref": "ACC-03", "label": "Paragraphe d'introduction", "texte": "Un espace sans filtre, sans jugement.", "source": "pages/index.astro" },
+            { "ref": "ACC-04", "label": "Quatre étiquettes (petites pastilles sous le paragraphe)", "liste": ["Confidentiel", "Sans jugement", "En audio ou visio où que vous soyez", "Sur rendez-vous (à votre convenance)"], "source": "pages/index.astro" },
+            { "ref": "ACC-05", "label": "Deux boutons", "liste": ["Prendre rendez-vous", "Comment ça se passe"], "source": "pages/index.astro" },
+            { "ref": "ACC-06", "label": "Carte de présentation à droite : nom et fonction", "texte": "Dr. Ibrahim HAÏDARA / Psychologue", "source": "pages/index.astro" },
+            { "ref": "ACC-07", "label": "Citation dans cette carte", "texte": "« Un espace pour déposer ce qui pèse, comprendre ce qui se joue, et avancer, à votre rythme. »", "source": "pages/index.astro" },
+            { "ref": "ACC-08", "label": "Trois repères listés dans cette carte", "liste": ["Diplômé de Saint-Pétersbourg & Tübingen", "Visioconsultation sécurisée", "Enfants · ados · adultes · couples"], "source": "pages/index.astro" }
+          ]
+        },
+        {
+          "titre": "Section « Comment ça se passe »",
+          "blocs": [
+            { "ref": "ACC-09", "label": "Petit texte au-dessus du titre", "texte": "Simple et rassurant", "source": "pages/index.astro" },
+            { "ref": "ACC-10", "label": "Titre de la section", "texte": "Comment ça se passe", "source": "pages/index.astro" },
+            { "ref": "ACC-11", "label": "Phrase d'introduction", "texte": "Consultez à distance sans vous déplacer, et en étant confortablement chez vous.", "source": "pages/index.astro" },
+            { "ref": "ACC-12", "label": "Étape 1 : titre", "texte": "Prenez rendez-vous. Vous serez vite pris en charge.", "source": "pages/index.astro" },
+            { "ref": "ACC-13", "label": "Étape 1 : texte", "texte": "Contactez-nous via notre formulaire de contact, par téléphone ou via WhatsApp.", "source": "pages/index.astro" },
+            { "ref": "ACC-14", "label": "Étape 2 : titre", "texte": "Un lien sécurisé vous sera envoyé dès la confirmation de votre séance.", "source": "pages/index.astro" },
+            { "ref": "ACC-15", "label": "Étape 2 : texte", "texte": "Un lien de visioconsultation sécurisé, à ouvrir depuis votre téléphone ou votre ordinateur, sans rien installer.", "source": "pages/index.astro" },
+            { "ref": "ACC-16", "label": "Étape 3 : titre", "texte": "On sera entièrement à votre écoute.", "source": "pages/index.astro" },
+            { "ref": "ACC-17", "label": "Étape 3 : texte", "texte": "Durée de votre séance : 45 min. Vous pouvez aussi convenir d'une consultation longue durée.", "source": "pages/index.astro" }
+          ]
+        },
+        {
+          "titre": "Bandeau des quatre chiffres clés",
+          "blocs": [
+            { "ref": "ACC-18", "label": "Chiffre 1", "texte": "45 min / Durée moyenne d'une séance", "source": "pages/index.astro" },
+            { "ref": "ACC-19", "label": "Chiffre 2", "texte": "1992 · 2006 / MSc Psychology · Doctorat Institut de Psychologie", "source": "pages/index.astro" },
+            { "ref": "ACC-20", "label": "Chiffre 3", "texte": "Tout public / Enfants, ados, adultes, couples", "source": "pages/index.astro" },
+            { "ref": "ACC-21", "label": "Chiffre 4", "texte": "100 % / Confidentiel et sans jugement", "source": "pages/index.astro" }
+          ]
+        },
+        {
+          "titre": "Section « Être écouté, vraiment » (avec la photo de vous en consultation)",
+          "blocs": [
+            { "ref": "ACC-22", "label": "Petit texte au-dessus du titre", "texte": "Un accompagnement pointu", "source": "pages/index.astro" },
+            { "ref": "ACC-23", "label": "Titre de la section", "texte": "Une écoute active comme vous le souhaitez", "source": "pages/index.astro" },
+            { "ref": "ACC-24", "label": "Paragraphe", "texte": "Un espace où l'on vous écoutera sans vous juger. Nous serons vigilants par rapport à vos épreuves.", "source": "pages/index.astro" },
+            { "ref": "ACC-25", "label": "Trois points cochés", "liste": ["Un lien de confiance séance après séance", "Un cadre confidentiel protégé par le secret professionnel", "Où que vous soyez en France"], "source": "pages/index.astro" },
+            { "ref": "ACC-26", "label": "Bouton", "texte": "Découvrez nos types de consultations", "source": "pages/index.astro" }
+          ]
+        },
+        {
+          "titre": "Section de présentation (votre portrait)",
+          "blocs": [
+            { "ref": "ACC-27", "label": "Petit texte au-dessus du titre", "texte": "Votre psychologue", "source": "pages/index.astro" },
+            { "ref": "ACC-28", "label": "Titre de la section", "texte": "Ibrahim HAÏDARA · Docteur en Psychologie", "source": "pages/index.astro" },
+            { "ref": "ACC-29", "label": "Paragraphe 1", "texte": "(retiré à la demande du Dr Haïdara, 15/08)", "source": "pages/index.astro" },
+            { "ref": "ACC-30", "label": "Paragraphe 2", "texte": "(retiré à la demande du Dr Haïdara, 15/08)", "source": "pages/index.astro" },
+            { "ref": "ACC-31", "label": "Paragraphe 3", "texte": "Un cadre qui vous permet d'être écouté depuis chez vous.", "source": "pages/index.astro" },
+            { "ref": "ACC-32", "label": "Bouton", "texte": "Expérience internationale (France, Allemagne, Afrique de l'Ouest)", "source": "pages/index.astro" },
+            { "ref": "ACC-33", "label": "Encadré de droite (retiré à la demande du Dr Haïdara, 15/08)", "texte": "(supprimé : titre + 2 paragraphes)", "source": "pages/index.astro" }
+          ]
+        },
+        {
+          "titre": "Section « Un accompagnement pour chacun » (les publics)",
+          "blocs": [
+            { "ref": "ACC-36", "label": "Petit texte au-dessus du titre", "texte": "Nous vous accompagnerons tout au long d'un processus adapté à vos besoins, à vos difficultés et à vos attentes", "source": "pages/index.astro" },
+            { "ref": "ACC-37", "label": "Titre de la section", "texte": "Un accompagnement pour tous", "source": "pages/index.astro" },
+            { "ref": "ACC-38", "label": "Phrase d'introduction", "texte": "Enfants, ados, adultes, couples.", "source": "pages/index.astro" },
+            { "ref": "ACC-39", "label": "Carte 1", "texte": "Enfants : Mal-être, angoisses, émotions négatives.", "source": "pages/index.astro" },
+            { "ref": "ACC-40", "label": "Carte 2", "texte": "Adolescents : Troubles relationnels, troubles du comportement, consommation de produits illicites/stupéfiants.", "source": "pages/index.astro" },
+            { "ref": "ACC-41", "label": "Carte 3", "texte": "Adultes : Idées noires, stress, deuil, estime de soi, burnout, relations difficiles avec les partenaires, traumatismes multiples.", "source": "pages/index.astro" },
+            { "ref": "ACC-42", "label": "Carte 4", "texte": "Couples : Difficultés de communication, conflits permanents, infidélité, conflits de loyauté, manque de désir, surmonter un trauma.", "source": "pages/index.astro" }
+          ]
+        },
+        {
+          "titre": "Galerie de photos « En images »",
+          "blocs": [
+            { "ref": "ACC-43", "label": "Petit texte au-dessus du titre", "texte": "En images", "source": "pages/index.astro" },
+            { "ref": "ACC-44", "label": "Titre de la section", "texte": "Le cabinet & les consultations", "source": "pages/index.astro" },
+            { "ref": "ACC-45", "label": "Phrase d'introduction", "texte": "Psychologue en milieu carcéral · Psychologue PJJ et ASE · Psychologue libéral.", "source": "pages/index.astro" }
+          ]
+        },
+        {
+          "titre": "Section des partenaires",
+          "blocs": [
+            { "ref": "ACC-46", "label": "Petit texte au-dessus du titre", "texte": "Ils m'ont fait confiance", "source": "pages/index.astro" },
+            { "ref": "ACC-47", "label": "Titre de la section", "texte": "Institutions & organisations", "source": "pages/index.astro" },
+            { "ref": "ACC-48", "label": "Logos affichés, dans l'ordre", "liste": ["CARE", "CICR (Croix-Rouge)", "Save the Children", "Ambassade du Canada", "Ambassade de France", "Ambassade de Suisse", "Orange Mali"], "note": "Humanity & Inclusion, IRC et Action Contre la Faim retirés (15/08). Partenaires France demandés (administration pénitentiaire Seine-et-Marne, PJJ Haute-Vienne, ASE Alsace) en attente : pas de logo fourni.", "source": "config/site.ts (partners), components/Partners.astro" }
+          ]
+        },
+        {
+          "titre": "Bandeau d'appel en bas de page",
+          "blocs": [
+            { "ref": "ACC-49", "label": "Titre du bandeau", "texte": "Et si vous en parliez ?", "source": "pages/index.astro" },
+            { "ref": "ACC-50", "label": "Phrase", "texte": "Votre 1ʳᵉ consultation vous permettra de faire d'autres pas et de ne plus vous sentir seul(e).", "source": "pages/index.astro" },
+            { "ref": "ACC-51", "label": "Deux boutons", "liste": ["Prendre rendez-vous", "(+33) 6 62 25 20 38"], "source": "pages/index.astro" }
+          ]
+        }
+      ],
+      "images": [
+        "Bannière du haut : pas de photo, un fond de couleurs dégradées animé.",
+        "Petite photo ronde de vous dans la carte de présentation, et votre portrait dans la section de présentation.",
+        "Grande photo de vous en consultation, section « Être écouté, vraiment ».",
+        "Galerie : 8 photos du cabinet (consultation, accueil, portrait au cabinet, famille, cabinet, échange, groupe, équipe).",
+        "Bandeau du bas : photo d'ambiance (lumière)."
+      ]
+    },
+
+    {
+      "code": "PSY",
+      "titre": "Page 2, Votre Psychologue",
+      "url": "psy2a.com/le-cabinet/",
+      "intro": "Page consacrée à votre parcours.",
+      "sections": [
+        {
+          "titre": "Bandeau d'ouverture",
+          "blocs": [
+            { "ref": "PSY-01", "label": "Petit texte au-dessus du titre", "texte": "Votre psychologue", "source": "pages/le-cabinet.astro" },
+            { "ref": "PSY-02", "label": "Titre de la page", "texte": "Ibrahim HAÏDARA · Docteur en Psychologie", "source": "pages/le-cabinet.astro" },
+            { "ref": "PSY-03", "label": "Phrase d'introduction (retirée à la demande du Dr Haïdara, 15/08)", "texte": "(supprimée)", "source": "pages/le-cabinet.astro" }
+          ]
+        },
+        {
+          "titre": "Récit « Mon parcours »",
+          "blocs": [
+            { "ref": "PSY-04", "label": "Titre", "texte": "Mon parcours", "source": "pages/le-cabinet.astro" },
+            { "ref": "PSY-05", "label": "Paragraphe 1", "texte": "+ 20 ans d'expérience dans le monde (secteur public, privé, profession libérale).", "source": "pages/le-cabinet.astro" },
+            { "ref": "PSY-06", "label": "Paragraphe 2 (retiré à la demande du Dr Haïdara, 15/08)", "texte": "(supprimé)", "source": "pages/le-cabinet.astro" },
+            { "ref": "PSY-07", "label": "Phrase mise en valeur (retirée à la demande du Dr Haïdara, 15/08)", "texte": "(supprimée)", "source": "pages/le-cabinet.astro" },
+            { "ref": "PSY-08", "label": "Paragraphe 3 (retiré à la demande du Dr Haïdara, 15/08)", "texte": "(supprimé)", "source": "pages/le-cabinet.astro" },
+            { "ref": "PSY-09", "label": "Liste des domaines d'expertise", "liste": ["Psychologie clinique", "Psychologie du travail", "Psychologie judiciaire", "Ethnopsychologie / Psychologie des migrants"], "source": "pages/le-cabinet.astro" }
+          ]
+        },
+        {
+          "titre": "Section « Une écoute attentive quelle que soit votre culture »",
+          "blocs": [
+            { "ref": "PSY-10", "label": "Titre", "texte": "Une écoute attentive quelle que soit votre culture", "source": "pages/le-cabinet.astro" },
+            { "ref": "PSY-11", "label": "Paragraphe 1 (retiré à la demande du Dr Haïdara, 15/08)", "texte": "(supprimé)", "source": "pages/le-cabinet.astro" },
+            { "ref": "PSY-12", "label": "Paragraphe 2 (retiré à la demande du Dr Haïdara, 15/08)", "texte": "(supprimé)", "source": "pages/le-cabinet.astro" }
+          ]
+        },
+        {
+          "titre": "Section « Consultations en ligne »",
+          "blocs": [
+            { "ref": "PSY-13", "label": "Titre", "texte": "Consultations en ligne", "source": "pages/le-cabinet.astro" },
+            { "ref": "PSY-14", "label": "Paragraphe", "texte": "Je reçois désormais en visioconsultation, depuis la France : un cadre confidentiel et souple qui permet de consulter depuis chez soi, où que l'on se trouve, sans rien perdre de la qualité de la relation.", "source": "pages/le-cabinet.astro" },
+            { "ref": "PSY-15", "label": "Bouton", "texte": "Prendre rendez-vous", "source": "pages/le-cabinet.astro" }
+          ]
+        },
+        {
+          "titre": "Fiche praticien (encadré de droite, avec votre portrait)",
+          "blocs": [
+            { "ref": "PSY-16", "label": "Nom et fonction", "texte": "Ibrahim HAÏDARA / Docteur en Psychologie", "source": "pages/le-cabinet.astro" },
+            { "ref": "PSY-17", "label": "Les cinq lignes de la fiche", "paires": [["Diplômes", "1992 : MSc Psychology · 2006 : Doctorat Institut de Psychologie"], ["RPPS", "10008658899"], ["Modalité", "Consultations en ligne sécurisées"], ["Publics", "Enfants, ados, adultes, couples"], ["Langue", "Français"]], "source": "pages/le-cabinet.astro" },
+            { "ref": "PSY-18", "label": "Bouton de la fiche", "texte": "Voir les consultations", "source": "pages/le-cabinet.astro" }
+          ]
+        }
+      ],
+      "images": [
+        "Bandeau du haut : photo d'ambiance (forêt, sérénité).",
+        "Votre portrait dans la fiche praticien, à droite."
+      ]
+    },
+
+    {
+      "code": "CON",
+      "titre": "Page 3, Consultations",
+      "url": "psy2a.com/consultations/",
+      "intro": "Page qui explique comment se passent les consultations.",
+      "sections": [
+        {
+          "titre": "Bandeau d'ouverture",
+          "blocs": [
+            { "ref": "CON-01", "label": "Petit texte au-dessus du titre", "texte": "Consultations", "source": "pages/consultations.astro" },
+            { "ref": "CON-02", "label": "Titre de la page", "texte": "Consultations en ligne. Confidentialité assurée via des liens sécurisés", "source": "pages/consultations.astro" },
+            { "ref": "CON-03", "label": "Phrase d'introduction", "texte": "Prise en charge et accompagnement assurés en ligne, où que vous soyez.", "source": "pages/consultations.astro" },
+            { "ref": "CON-04", "label": "Deux boutons", "liste": ["Prise de rendez-vous", "Voir les formats"], "source": "pages/consultations.astro" }
+          ]
+        },
+        {
+          "titre": "Paragraphe d'accroche",
+          "blocs": [
+            { "ref": "CON-05", "label": "Paragraphe", "texte": "Je vous accueille et vous accompagne tout au long d'un processus de soutien psychologique, dans un cadre d'échanges sereins et de confiance mutuelle. L'objectif : une prise en charge efficace, respectueuse de votre rythme.", "source": "pages/consultations.astro" }
+          ]
+        },
+        {
+          "titre": "Section « Un temps pour vous, rien que pour vous »",
+          "blocs": [
+            { "ref": "CON-06", "label": "Petit texte au-dessus du titre", "texte": "Comment se déroule une séance", "source": "pages/consultations.astro" },
+            { "ref": "CON-07", "label": "Titre de la section", "texte": "Un temps pour vous, rien que pour vous", "source": "pages/consultations.astro" },
+            { "ref": "CON-08", "label": "Carte 1", "texte": "Un cadre confidentiel : Un temps réservé uniquement pour vous, protégé par le secret professionnel.", "source": "pages/consultations.astro" },
+            { "ref": "CON-09", "label": "Carte 2", "texte": "45 min ou + : À votre convenance.", "source": "pages/consultations.astro" },
+            { "ref": "CON-10", "label": "Carte 3", "texte": "Pratique, depuis chez vous : À partir de votre téléphone ou ordinateur. Rien à installer.", "source": "pages/consultations.astro" }
+          ]
+        },
+        {
+          "titre": "Section « La consultation qui vous correspond » (les formats)",
+          "blocs": [
+            { "ref": "CON-11", "label": "Petit texte au-dessus du titre", "texte": "Plusieurs formats", "source": "pages/consultations.astro" },
+            { "ref": "CON-12", "label": "Titre de la section", "texte": "La consultation qui vous correspond", "source": "pages/consultations.astro" },
+            { "ref": "CON-13", "label": "Format 1", "texte": "En individuel : Un suivi personnel, à votre rythme.", "source": "pages/consultations.astro" },
+            { "ref": "CON-14", "label": "Format 2", "texte": "En couple : Renouer le dialogue, dénouer les conflits.", "source": "pages/consultations.astro" },
+            { "ref": "CON-15", "label": "Format 3", "texte": "En famille : Avec vos enfants ou vos adolescents.", "source": "pages/consultations.astro" },
+            { "ref": "CON-16", "label": "Format 4", "texte": "Accompagnement sur le plan professionnel : Prévention des risques psychosociaux, soutien à la mobilité professionnelle.", "source": "pages/consultations.astro" }
+          ]
+        },
+        {
+          "titre": "Section « Conditions pratiques »",
+          "blocs": [
+            { "ref": "CON-17", "label": "Petit texte au-dessus du titre", "texte": "Bon à savoir", "source": "pages/consultations.astro" },
+            { "ref": "CON-18", "label": "Titre de la section", "texte": "Conditions pratiques", "source": "pages/consultations.astro" },
+            { "ref": "CON-19", "label": "Ligne des horaires", "texte": "Horaires : Du lundi au samedi, uniquement sur rendez-vous.", "note": "Pour modifier les horaires, voir GEN-10 (une seule modification suffit pour tout le site).", "source": "config/site.ts (hours)" },
+            { "ref": "CON-20", "label": "Condition 1", "texte": "Ponctualité : Le créneau réservé vous est entièrement dédié : merci d'être à l'heure.", "source": "pages/consultations.astro" },
+            { "ref": "CON-21", "label": "Condition 2", "texte": "Annulation : Prévenez au plus tard 24 h avant. Passé ce délai, la séance est due.", "source": "pages/consultations.astro" },
+            { "ref": "CON-22", "label": "Condition 3", "texte": "Tarifs : Honoraires libres, variant de 50 € à 80 € la séance.", "source": "pages/consultations.astro" },
+            { "ref": "CON-23", "label": "Condition 4", "texte": "Réponse : Une réponse vous est adressée en moins de 24 heures.", "source": "pages/consultations.astro" }
+          ]
+        },
+        {
+          "titre": "Bandeau d'appel en bas de page",
+          "blocs": [
+            { "ref": "CON-24", "label": "Titre du bandeau", "texte": "Prendre rendez-vous", "source": "pages/consultations.astro" },
+            { "ref": "CON-25", "label": "Phrase", "texte": "Que ce soit par appel direct ou via WhatsApp, un créneau vous sera réservé.", "source": "pages/consultations.astro" },
+            { "ref": "CON-26", "label": "Deux boutons", "liste": ["Nous contacter", "(+33) 6 62 25 20 38"], "source": "pages/consultations.astro" }
+          ]
+        }
+      ],
+      "images": [
+        "Bandeau du haut : photo d'une visioconsultation.",
+        "Bandeau du bas : photo d'ambiance (ponton)."
+      ]
+    },
+
+    {
+      "code": "PRE",
+      "titre": "Page 4, Presse & TV",
+      "url": "psy2a.com/presse/",
+      "intro": "Page épurée le 15/08 à la demande du Dr Haïdara : bandeau, texte de présentation et 18 des 22 vidéos ont été retirés. Il ne reste que les 4 vidéos qu'il avait laissées sans annotation « SUPPRIMER ». Bandeau simplifié (titre seul, sans photo).",
+      "sections": [
+        {
+          "titre": "Bandeau d'ouverture",
+          "blocs": [
+            { "ref": "PRE-01", "label": "Titre de la page", "texte": "Presse & TV", "source": "pages/presse.astro" }
+          ]
+        },
+        {
+          "titre": "Vidéos conservées, dans l'ordre d'affichage",
+          "blocs": [
+            { "ref": "PRE-02", "label": "Vidéo 1 (ex-Vidéo 14)", "texte": "Le mal-être psychologique dans nos familles", "source": "pages/presse.astro" },
+            { "ref": "PRE-03", "label": "Vidéo 2 (ex-Vidéo 16)", "texte": "Émigration / Immigration / Migration", "source": "pages/presse.astro" },
+            { "ref": "PRE-04", "label": "Vidéo 3 (ex-Vidéo 19)", "texte": "Les crises à l'adolescence", "source": "pages/presse.astro" },
+            { "ref": "PRE-05", "label": "Vidéo 4 (ex-Vidéo 21)", "texte": "PSY2A : la psychologie, qu'en est-il au Mali ?", "source": "pages/presse.astro" }
+          ]
+        }
+      ],
+      "images": [
+        "Bandeau du haut : sans photo (bandeau de couleur, comme les pages légales)."
+      ]
+    },
+
+    {
+      "code": "CTC",
+      "titre": "Page 5, Contact",
+      "url": "psy2a.com/contact/",
+      "intro": "Page de prise de contact : formulaire à gauche, coordonnées à droite.",
+      "sections": [
+        {
+          "titre": "Bandeau d'ouverture",
+          "blocs": [
+            { "ref": "CTC-01", "label": "Petit texte au-dessus du titre", "texte": "Contact", "source": "pages/contact.astro" },
+            { "ref": "CTC-02", "label": "Titre de la page", "texte": "Parlons de votre demande", "source": "pages/contact.astro" },
+            { "ref": "CTC-03", "label": "Phrase d'introduction", "texte": "Une question, un premier rendez-vous ? Écrivez-nous ou appelez-nous : une réponse vous est adressée sous 24 h.", "source": "pages/contact.astro" }
+          ]
+        },
+        {
+          "titre": "Formulaire de contact",
+          "blocs": [
+            { "ref": "CTC-04", "label": "Titre du formulaire", "texte": "Envoyer un message", "source": "pages/contact.astro" },
+            { "ref": "CTC-05", "label": "Mention sous le titre", "texte": "Les champs marqués * sont obligatoires.", "source": "pages/contact.astro" },
+            { "ref": "CTC-06", "label": "Noms des champs à remplir", "liste": ["Prénom (obligatoire)", "Nom (obligatoire)", "Adresse e-mail (obligatoire)", "Téléphone (facultatif)", "Motif de la demande (facultatif)", "Tranche d'âge (facultatif)", "Créneau souhaité (facultatif)", "Votre message (obligatoire)"], "note": "3 champs ajoutés le 15/08 (motif, tranche d'âge, créneau souhaité), suite à la réponse OUI du Dr Haïdara (Q-06).", "source": "pages/contact.astro" },
+            { "ref": "CTC-07", "label": "Textes gris affichés dans les champs vides", "liste": ["Votre prénom", "Votre nom", "Votre e-mail", "Votre numéro de téléphone", "Facultatif : matin, après-midi, soir…", "Décrivez brièvement votre demande…"], "source": "pages/contact.astro" },
+            { "ref": "CTC-08", "label": "Bouton d'envoi", "texte": "Envoyer le message", "source": "pages/contact.astro" },
+            { "ref": "CTC-09", "label": "Mention sous le bouton", "texte": "Vos informations restent confidentielles et ne servent qu'à traiter votre demande.", "source": "pages/contact.astro" },
+            { "ref": "CTC-10", "label": "Message affiché après l'envoi", "texte": "Merci ! Votre message a bien été envoyé.", "source": "pages/contact.astro" }
+          ]
+        },
+        {
+          "titre": "Encadré des coordonnées (à droite)",
+          "blocs": [
+            { "ref": "CTC-11", "label": "Titre de l'encadré", "texte": "Coordonnées", "source": "pages/contact.astro" },
+            { "ref": "CTC-12", "label": "Intitulés des quatre lignes", "liste": ["Téléphone", "WhatsApp", "E-mail", "Consultations"], "note": "Les valeurs (numéro, e-mail, horaires) se modifient dans la partie « Éléments présents sur toutes les pages », références GEN-07 à GEN-10.", "source": "pages/contact.astro" },
+            { "ref": "CTC-13", "label": "Texte du lien WhatsApp", "texte": "Écrire sur WhatsApp", "source": "pages/contact.astro" },
+            { "ref": "CTC-14", "label": "Note en bas de l'encadré", "texte": "Sur rendez-vous uniquement. Les consultations se déroulent en visio, partout en France.", "source": "pages/contact.astro" }
+          ]
+        }
+      ],
+      "images": [
+        "Bandeau du haut : sans photo depuis le 15/08 (retiré à la demande du Dr Haïdara).",
+        "Aucune carte géographique n'est affichée, puisque les consultations sont à distance."
+      ]
+    },
+
+    {
+      "code": "MEN",
+      "titre": "Page 6, Mentions légales",
+      "url": "psy2a.com/mentions-legales/",
+      "intro": "Page obligatoire en France. Le texte actuel est un modèle : il doit être validé par vous, et les mentions [À COMPLÉTER] doivent être renseignées avant la mise en ligne.",
+      "sections": [
+        {
+          "titre": "Contenu de la page",
+          "blocs": [
+            { "ref": "MEN-01", "label": "Titre de la page", "texte": "Mentions légales", "source": "pages/mentions-legales.astro" },
+            { "ref": "MEN-02", "label": "Éditeur du site", "texte": "Entreprise individuelle PSY2A, Ibrahim HAÏDARA, Docteur en Psychologie. Numéro RPPS : 10008658899. SIREN : 995 147 105 · SIRET : 995 147 105 00028 · Code APE : 96.09Z. [À COMPLÉTER : adresse du siège]. Téléphone : (+33) 6 62 25 20 38 · E-mail : contact@psy2a.com", "note": "À COMPLÉTER : le Dr a répondu « Téléconsultations » à cette question (Q-01), mais une adresse postale reste légalement obligatoire pour les mentions légales d'une entreprise individuelle en France (LCEN). Merci de nous transmettre une adresse réelle (domicile ou domiciliation).", "source": "pages/mentions-legales.astro" },
+            { "ref": "MEN-03", "label": "Directeur de la publication", "texte": "Ibrahim HAÏDARA, Psychologue, Docteur en Psychologie.", "source": "pages/mentions-legales.astro" },
+            { "ref": "MEN-04", "label": "Hébergement", "texte": "Ce site est hébergé par Bluehost (Newfold Digital Inc.), États-Unis. [À COMPLÉTER : adresse complète de l'hébergeur.]", "note": "À confirmer : le site restera-t-il hébergé chez Bluehost ?", "source": "pages/mentions-legales.astro" },
+            { "ref": "MEN-05", "label": "Propriété intellectuelle", "texte": "L'ensemble des contenus (textes, images, logo) présents sur ce site est la propriété du cabinet PSY2A, sauf mention contraire. Toute reproduction ou représentation, totale ou partielle, sans autorisation écrite préalable, est interdite.", "source": "pages/mentions-legales.astro" },
+            { "ref": "MEN-06", "label": "Données personnelles", "texte": "Le traitement de vos données est décrit dans notre politique de confidentialité.", "source": "pages/mentions-legales.astro" }
+          ]
+        }
+      ],
+      "images": ["Bandeau du haut : bandeau de couleur, sans photo."]
+    },
+
+    {
+      "code": "CNF",
+      "titre": "Page 7, Politique de confidentialité",
+      "url": "psy2a.com/confidentialite/",
+      "intro": "Page obligatoire (RGPD). Elle décrit uniquement le site vitrine actuel. Quand la prise de rendez-vous et la visioconsultation seront ajoutées, elle devra être complétée (données de santé).",
+      "sections": [
+        {
+          "titre": "Contenu de la page",
+          "blocs": [
+            { "ref": "CNF-01", "label": "Titre de la page", "texte": "Politique de confidentialité", "source": "pages/confidentialite.astro" },
+            { "ref": "CNF-02", "label": "Paragraphe d'introduction", "texte": "Cette politique décrit le traitement de vos données dans le cadre du site vitrine PSY2A. Le cabinet s'engage à protéger votre vie privée conformément au RGPD.", "source": "pages/confidentialite.astro" },
+            { "ref": "CNF-03", "label": "Responsable du traitement", "texte": "Ibrahim HAÏDARA, Psychologue, Docteur en Psychologie, Cabinet PSY2A. Contact : contact@psy2a.com.", "source": "pages/confidentialite.astro" },
+            { "ref": "CNF-04", "label": "Données collectées", "texte": "Le site ne collecte des données que si vous utilisez le formulaire de contact : prénom, nom, adresse e-mail, numéro de téléphone (facultatif) et votre message. Aucune donnée de santé n'est collectée via ce site vitrine.", "source": "pages/confidentialite.astro" },
+            { "ref": "CNF-05", "label": "Finalité et base légale", "texte": "Ces données servent uniquement à répondre à votre demande de contact ou de rendez-vous (base légale : votre consentement / l'intérêt légitime du cabinet à vous répondre).", "source": "pages/confidentialite.astro" },
+            { "ref": "CNF-06", "label": "Fonctionnement du formulaire", "texte": "En version actuelle, le formulaire ouvre votre logiciel de messagerie pour envoyer votre message directement au cabinet : aucune donnée n'est transmise à un service tiers par le site.", "source": "pages/confidentialite.astro" },
+            { "ref": "CNF-07", "label": "Cookies et mesure d'audience", "texte": "Ce site n'utilise aucun cookie, aucun traceur et aucun outil de mesure d'audience. Les vidéos de la page Presse ne se chargent qu'après un clic de votre part (lecture différée, sans cookie tant que vous ne lancez pas la vidéo).", "source": "pages/confidentialite.astro" },
+            { "ref": "CNF-08", "label": "Durée de conservation", "texte": "Les messages reçus via le formulaire de contact sont conservés 1 an après le dernier échange.", "source": "pages/confidentialite.astro" },
+            { "ref": "CNF-09", "label": "Vos droits", "texte": "Vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition et de portabilité de vos données. Pour l'exercer, écrivez à contact@psy2a.com. Vous pouvez également saisir l'autorité de contrôle compétente.", "source": "pages/confidentialite.astro" }
+          ]
+        }
+      ],
+      "images": ["Bandeau du haut : bandeau de couleur, sans photo."]
+    }
+  ],
+
+  "questions": [
+    "Adresse du siège à faire figurer dans les mentions légales (obligatoire en France, LCEN) : la réponse « Téléconsultations » (15/08) n'est pas une adresse postale valide, merci de nous transmettre une adresse réelle.",
+    "Nouveau logo : fichier source attendu (avec la charte couleur par lettre PSY2A et le modèle M.A.Y exact).",
+    "Photos attendues : 2 photos du Dr Haïdara + 1-2 photos de local/bureau (réponse Q-07, 15/08).",
+    "Logos partenaires France demandés (administration pénitentiaire Seine-et-Marne, PJJ Haute-Vienne, ASE Alsace) : pas de logo fourni, à transmettre ou à confirmer en mention texte seule.",
+    "Presse & TV → FAQ : le Dr a suggéré de remplacer l'entrée de menu par une FAQ, sans être sûr lui-même (« ??? »). Non appliqué le 15/08 (page Presse & TV simplement épurée à 4 vidéos) : souhaitez-vous qu'on prépare une FAQ, et si oui, quelles questions ?"
+  ]
+}

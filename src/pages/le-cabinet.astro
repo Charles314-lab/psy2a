@@ -1,0 +1,142 @@
+---
+/**
+ * Page « Votre Psychologue », parcours du Dr Ibrahim Haïdara.
+ * Mise en page éditoriale : récit à gauche, fiche praticien sticky à droite.
+ * Contenu recentré sur la téléconsultation en France (les crédentiels réels
+ * (MSc 1992, Doctorat 2006) et l'expertise clinique sont conservés).
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import Hero from '../components/Hero.astro';
+import { site } from '../config/site';
+import portrait from '../assets/portrait-haidara.png';
+import heroImg from '../assets/photos/serenite.jpg';
+
+// Domaines de la psychologie pratiqués (présentés en grille, pas en liste brute).
+const expertises = [
+  'Psychologie clinique',
+  'Psychologie du travail',
+  'Psychologie judiciaire',
+  'Ethnopsychologie / Psychologie des migrants',
+];
+
+// Repères de la fiche praticien.
+const facts = [
+  { k: 'Diplômes', v: '1992 : MSc Psychology · 2006 : Doctorat Institut de Psychologie' },
+  { k: 'RPPS', v: site.registration.rpps },
+  { k: 'Modalité', v: 'Consultations en ligne sécurisées' },
+  { k: 'Publics', v: 'Enfants, ados, adultes, couples' },
+  { k: 'Langue', v: 'Français' },
+];
+---
+
+<BaseLayout
+  title="Votre Psychologue"
+  description="Parcours d'Ibrahim Haïdara, docteur en psychologie. Consultations en ligne, partout en France."
+>
+  <Hero
+    eyebrow="Votre psychologue"
+    title={`${site.practitionerName} · ${site.practitionerTitle}`}
+    image={heroImg}
+  />
+
+  <section class="section">
+    <div class="container bio">
+      <!-- Récit -->
+      <article class="bio__main">
+        <h2 class="display">Mon parcours</h2>
+        <p>
+          + 20 ans d'expérience dans le monde (secteur public, privé, profession libérale).
+        </p>
+
+        <ul class="expertise" role="list">
+          {expertises.map((e) => <li class="expertise__item">{e}</li>)}
+        </ul>
+
+        <h2 class="display">Consultations en ligne</h2>
+        <p>
+          Je reçois désormais en visioconsultation, depuis la France : un cadre confidentiel et
+          souple qui permet de consulter depuis chez soi, où que l'on se trouve, sans rien perdre
+          de la qualité de la relation.
+        </p>
+
+        <a class="btn btn--primary" href="/contact/">Prendre rendez-vous</a>
+      </article>
+
+      <!-- Fiche praticien (sticky) -->
+      <aside class="bio__card">
+        <figure class="bio__portrait">
+          <Image
+            src={portrait}
+            alt="Ibrahim Haïdara, psychologue"
+            widths={[240, 360, 480]}
+            sizes="(max-width: 900px) 200px, 300px"
+            format="webp"
+            loading="eager"
+          />
+        </figure>
+        <p class="bio__name">{site.practitionerName}</p>
+        <p class="bio__role">{site.practitionerTitle}</p>
+        <dl class="bio__facts">
+          {facts.map((f) => (
+            <div class="bio__fact">
+              <dt>{f.k}</dt>
+              <dd>{f.v}</dd>
+            </div>
+          ))}
+        </dl>
+        <a class="btn btn--outline bio__cta" href="/consultations/">Voir les consultations</a>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .bio {
+    display: grid; grid-template-columns: 1.55fr .85fr; gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  .bio__main > * + * { margin-top: var(--space-4); }
+  .bio__main h2 { margin-top: var(--space-7); }
+  .bio__main h2:first-child { margin-top: 0; }
+
+  /* Domaines d'expertise en grille de puces */
+  .expertise {
+    list-style: none; padding: 0; margin-top: var(--space-5) !important;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3);
+  }
+  .expertise__item {
+    position: relative; padding: var(--space-3) var(--space-4) var(--space-3) var(--space-6);
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: var(--radius); font-weight: 600; font-size: var(--fs-100);
+  }
+  .expertise__item::before {
+    content: ''; position: absolute; left: var(--space-4); top: 50%; transform: translateY(-50%);
+    width: .55rem; height: .55rem; border-radius: 50%; background: var(--color-accent);
+  }
+
+  /* Fiche praticien */
+  .bio__card {
+    position: sticky; top: calc(var(--header-h) + var(--space-4));
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg); padding: var(--space-6); box-shadow: var(--shadow-1);
+  }
+  .bio__portrait {
+    margin: 0 0 var(--space-4); border-radius: var(--radius); overflow: hidden;
+    border: 1px solid var(--color-border); background: #fff; box-shadow: var(--shadow-1);
+  }
+  .bio__portrait img { width: 100%; height: auto; display: block; }
+  .bio__name { font-weight: 800; font-size: var(--fs-400); }
+  .bio__role { color: var(--color-muted); font-size: var(--fs-100); margin-top: 2px; }
+  .bio__facts { margin: var(--space-5) 0 0; display: grid; gap: var(--space-4); }
+  .bio__fact dt { font-size: var(--fs-100); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: var(--color-accent); }
+  .bio__fact dd { margin: 2px 0 0; color: var(--color-text); font-size: var(--fs-100); }
+  .bio__cta { margin-top: var(--space-6); width: 100%; }
+
+  @media (max-width: 900px) {
+    .bio { grid-template-columns: 1fr; }
+    .bio__card { position: static; order: -1; }
+    .bio__portrait { max-width: 240px; }
+    .expertise { grid-template-columns: 1fr; }
+  }
+</style>

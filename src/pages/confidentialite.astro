@@ -1,0 +1,69 @@
+---
+/**
+ * Politique de confidentialité (RGPD).
+ * ⚠️ MODÈLE à faire valider par le Dr Haïdara / un juriste. Décrit la vitrine v1
+ * uniquement. La téléconsultation (phase 2 = données de santé) fera l'objet
+ * d'une politique dédiée (voir skill telehealth-compliance).
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config/site';
+import Hero from '../components/Hero.astro';
+---
+
+<BaseLayout
+  title="Politique de confidentialité"
+  description="Comment le cabinet PSY2A traite vos données personnelles (RGPD)."
+>
+  <Hero title="Politique de confidentialité" compact />
+  <section class="section">
+    <div class="container prose">
+      <p>
+        Cette politique décrit le traitement de vos données dans le cadre du site vitrine PSY2A.
+        Le cabinet s'engage à protéger votre vie privée conformément au RGPD.
+      </p>
+
+      <h2>Responsable du traitement</h2>
+      <p>
+        {site.practitionerName}<br />Psychologue<br />{site.practitionerTitle}, Cabinet PSY2A.
+        Contact : <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.
+      </p>
+
+      <h2>Données collectées</h2>
+      <p>
+        Le site ne collecte des données que si vous utilisez le <a href="/contact/">formulaire de contact</a> :
+        prénom, nom, adresse e-mail, numéro de téléphone (facultatif) et votre message.
+        <strong>Aucune donnée de santé</strong> n'est collectée via ce site vitrine.
+      </p>
+
+      <h2>Finalité et base légale</h2>
+      <p>
+        Ces données servent uniquement à répondre à votre demande de contact ou de rendez-vous
+        (base légale : votre consentement / l'intérêt légitime du cabinet à vous répondre).
+      </p>
+
+      <h2>Fonctionnement du formulaire</h2>
+      <p>
+        En version actuelle, le formulaire ouvre votre logiciel de messagerie pour envoyer votre
+        message directement au cabinet : aucune donnée n'est transmise à un service tiers par le site.
+      </p>
+
+      <h2>Cookies et mesure d'audience</h2>
+      <p>
+        Ce site n'utilise <strong>aucun cookie</strong>, aucun traceur et aucun outil de mesure
+        d'audience. Les vidéos de la page Presse ne se chargent qu'après un clic de votre part
+        (lecture différée, sans cookie tant que vous ne lancez pas la vidéo).
+      </p>
+
+      <h2>Durée de conservation</h2>
+      <p>Les messages reçus via le formulaire de contact sont conservés 1 an après le dernier échange.</p>
+
+      <h2>Vos droits</h2>
+      <p>
+        Vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition et de
+        portabilité de vos données. Pour l'exercer, écrivez à
+        <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>. Vous pouvez également
+        saisir l'autorité de contrôle compétente.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

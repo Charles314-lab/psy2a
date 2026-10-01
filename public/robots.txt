@@ -1,0 +1,6 @@
+# Robots, vitrine PSY2A
+User-agent: *
+Allow: /
+
+# Sitemap (généré au build)
+Sitemap: https://psy2a.com/sitemap-index.xml

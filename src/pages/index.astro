@@ -1,0 +1,473 @@
+---
+/**
+ * Page d'accueil, vitrine PSY2A (téléconsultation psychologique, France).
+ *
+ * Parti pris design : le portrait source est ancien et sur fond blanc ; on ne
+ * l'expose donc PAS en grand. Le hero est une scène d'ambiance construite au
+ * design (dégradés de marque bleu/vert + formes organiques « respirantes »),
+ * et le portrait est présenté en secondaire, traité dans une carte.
+ * Objectif : un site chaleureux, rassurant, qui « parle » au visiteur.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import { site, audiences } from '../config/site';
+import Partners from '../components/Partners.astro';
+import portrait from '../assets/portrait-haidara.png';
+// Photo d'écoute : le Dr Haïdara lui-même en consultation (vraie photo, site du Mali).
+import drEcoute from '../assets/gallery-mali/dr-ecoute.jpg';
+import ctaLumiere from '../assets/photos/lumiere.jpg';
+// Galerie « en images » : vraies photos du cabinet (site du Mali).
+import gAccueil from '../assets/gallery-mali/accueil.jpg';
+import gConsultation from '../assets/gallery-mali/consultation.jpg';
+import gPortrait from '../assets/gallery-mali/portrait-cabinet.jpg';
+import gFamille from '../assets/gallery-mali/famille.jpg';
+import gCabinet from '../assets/gallery-mali/cabinet.jpg';
+import gEchange from '../assets/gallery-mali/echange.jpg';
+import gGroupe from '../assets/gallery-mali/groupe.jpg';
+import gEquipe from '../assets/gallery-mali/equipe.jpg';
+
+// Étapes « Comment ça se passe » (réassurance parcours).
+const steps = [
+  {
+    n: '1',
+    title: 'Prenez rendez-vous. Vous serez vite pris en charge.',
+    text: 'Contactez-nous via notre formulaire de contact, par téléphone ou via WhatsApp.',
+  },
+  {
+    n: '2',
+    title: 'Un lien sécurisé vous sera envoyé dès la confirmation de votre séance.',
+    text: 'Un lien de visioconsultation sécurisé, à ouvrir depuis votre téléphone ou votre ordinateur, sans rien installer.',
+  },
+  {
+    n: '3',
+    title: 'On sera entièrement à votre écoute.',
+    text: 'Durée de votre séance : 45 min. Vous pouvez aussi convenir d’une consultation longue durée.',
+  },
+];
+
+// Chiffres clés, factuels et rassurants (pas de mesure gadget).
+const stats = [
+  { value: '45 min', label: 'Durée moyenne d’une séance' },
+  { value: '1992 · 2006', label: 'MSc Psychology · Doctorat Institut de Psychologie' },
+  { value: 'Tout public', label: 'Enfants, ados, adultes, couples' },
+  { value: '100 %', label: 'Confidentiel et sans jugement' },
+];
+
+// Détail des publics (titre + phrase concrète).
+const publics = [
+  { name: 'Enfants', text: 'Mal-être, angoisses, émotions négatives.' },
+  { name: 'Adolescents', text: 'Troubles relationnels, troubles du comportement, consommation de produits illicites/stupéfiants.' },
+  { name: 'Adultes', text: 'Idées noires, stress, deuil, estime de soi, burnout, relations difficiles avec les partenaires, traumatismes multiples.' },
+  { name: 'Couples', text: 'Difficultés de communication, conflits permanents, infidélité, conflits de loyauté, manque de désir, surmonter un trauma.' },
+];
+---
+
+<BaseLayout
+  description="Teleconsultation psychologique avec Ibrahim Haïdara. Un espace confidentiel et sans jugement pour enfants, ados, adultes et couples, partout en France."
+>
+  <!-- ============================ HERO D'AMBIANCE ============================ -->
+  <section class="amb-hero">
+    <!-- Aurores de marque, mouvement lent et respectueux de prefers-reduced-motion -->
+    <div class="amb-hero__aura" aria-hidden="true">
+      <span class="blob blob--1"></span>
+      <span class="blob blob--2"></span>
+      <span class="blob blob--3"></span>
+    </div>
+
+    <div class="container amb-hero__inner">
+      <div class="amb-hero__content" data-reveal>
+        <p class="eyebrow amb-hero__eyebrow">Psychologue en ligne</p>
+        <h1 class="display amb-hero__title">Nous construirons pas à pas vos forces.</h1>
+        <p class="amb-hero__lead">
+          Un espace sans filtre, sans jugement.
+        </p>
+
+        <ul class="chips amb-hero__chips">
+          <li class="chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-3 8.3-7 9-4-0.7-7-4.6-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+            Confidentiel
+          </li>
+          <li class="chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V6a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+            Sans jugement
+          </li>
+          <li class="chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="5" width="15" height="14" rx="2"/><path d="M17 9l5-3v12l-5-3"/></svg>
+            En audio ou visio où que vous soyez
+          </li>
+          <li class="chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            Sur rendez-vous (à votre convenance)
+          </li>
+        </ul>
+
+        <div class="amb-hero__actions">
+          <a class="btn btn--primary" href="/contact/">Prendre rendez-vous</a>
+          <a class="btn btn--ghost" href="#comment">Comment ça se passe</a>
+        </div>
+      </div>
+
+      <!-- Carte « signature » sobre (le portrait entier est présenté plus bas, en bio) -->
+      <aside class="hero-card" data-reveal>
+        <span class="hero-card__halo" aria-hidden="true"></span>
+        <div class="hero-card__id">
+          <span class="hero-card__avatar">
+            <Image
+              src={portrait}
+              alt="Portrait d'Ibrahim Haïdara, psychologue"
+              widths={[96, 144]}
+              sizes="72px"
+              loading="eager"
+              format="webp"
+            />
+          </span>
+          <span class="hero-card__idtext">
+            <span class="hero-card__name">{site.practitioner}</span>
+            <span class="hero-card__role">Psychologue</span>
+          </span>
+        </div>
+        <p class="hero-card__quote">
+          « Un espace pour déposer ce qui pèse, comprendre ce qui se joue,
+          et avancer, à votre rythme. »
+        </p>
+        <ul class="hero-card__facts">
+          <li>Diplômé de Saint-Pétersbourg &amp; Tübingen</li>
+          <li>Visioconsultation sécurisée</li>
+          <li>Enfants · ados · adultes · couples</li>
+        </ul>
+      </aside>
+    </div>
+
+    <div class="amb-hero__fade" aria-hidden="true"></div>
+  </section>
+
+  <!-- ===================== COMMENT ÇA SE PASSE (réassurance) ===================== -->
+  <section class="section" id="comment">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Simple et rassurant</p>
+        <h2 class="display">Comment ça se passe</h2>
+        <p>Consultez à distance sans vous déplacer, et en étant confortablement chez vous.</p>
+      </div>
+
+      <ol class="steps" data-reveal>
+        {steps.map((s) => (
+          <li class="step">
+            <span class="step__num" aria-hidden="true">{s.n}</span>
+            <h3 class="step__title">{s.title}</h3>
+            <p class="step__text">{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ========================= CHIFFRES CLÉS ========================= -->
+  <section class="section section--tight" aria-label="Repères">
+    <div class="container stats" data-reveal>
+      {stats.map((s) => (
+        <div class="stat">
+          <p class="stat__value display">{s.value}</p>
+          <p class="stat__label">{s.label}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===================== ACCOMPAGNEMENT (photo) ===================== -->
+  <section class="section">
+    <div class="container feature" data-reveal>
+      <figure class="feature__media">
+        <Image
+          src={drEcoute}
+          alt="Ibrahim Haïdara a l'ecoute d'un patient, en consultation"
+          widths={[480, 720, 960]}
+          sizes="(max-width: 900px) 100vw, 480px"
+          format="webp"
+          loading="lazy"
+        />
+      </figure>
+      <div class="feature__body">
+        <p class="eyebrow">Un accompagnement pointu</p>
+        <h2 class="display">Une écoute active comme vous le souhaitez</h2>
+        <p>
+          Un espace où l'on vous écoutera sans vous juger. Nous serons vigilants par
+          rapport à vos épreuves.
+        </p>
+        <ul class="feature__list">
+          <li>Un lien de confiance séance après séance</li>
+          <li>Un cadre confidentiel protégé par le secret professionnel</li>
+          <li>Où que vous soyez en France</li>
+        </ul>
+        <a class="btn btn--primary" href="/consultations/">Découvrez nos types de consultations</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= PRÉSENTATION ========================= -->
+  <section class="section section--surface" id="presentation">
+    <div class="container bio-solo" data-reveal>
+      <figure class="bio-portrait">
+        <Image
+          src={portrait}
+          alt="Ibrahim Haïdara, psychologue"
+          widths={[220, 320, 440]}
+          sizes="(max-width: 960px) 160px, 220px"
+          loading="lazy"
+          format="webp"
+        />
+      </figure>
+      <p class="eyebrow">Votre psychologue</p>
+      <h2 class="display">{site.practitionerName} · {site.practitionerTitle}</h2>
+      <p>
+        Un cadre qui vous permet d’être écouté depuis chez vous.
+      </p>
+      <a class="btn btn--outline" href="/le-cabinet/">Expérience internationale (France, Allemagne, Afrique de l’Ouest)</a>
+    </div>
+  </section>
+
+  <!-- ======================== PRISES EN CHARGE ======================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Nous vous accompagnerons tout au long d’un processus adapté à vos besoins, à vos difficultés et à vos attentes</p>
+        <h2 class="display">Un accompagnement pour tous</h2>
+        <p>Enfants, ados, adultes, couples.</p>
+      </div>
+      <ul class="publics" role="list" data-reveal>
+        {publics.map((p) => (
+          <li class="public-card">
+            <h3 class="public-card__name">{p.name}</h3>
+            <p class="public-card__text">{p.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================ GALERIE (photos du cabinet) ============================ -->
+  <section class="section section--surface">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">En images</p>
+        <h2 class="display">Le cabinet & les consultations</h2>
+        <p>Psychologue en milieu carcéral · Psychologue PJJ et ASE · Psychologue libéral.</p>
+      </div>
+      <ul class="gallery-grid" role="list" data-reveal>
+        <li class="gphoto"><Image src={gConsultation} alt="Ibrahim Haïdara en consultation" widths={[360, 560, 720]} sizes="(max-width: 900px) 50vw, 270px" format="webp" quality={62} loading="lazy" /></li>
+        <li class="gphoto"><Image src={gAccueil} alt="Un accueil chaleureux au cabinet" widths={[360, 560, 720]} sizes="(max-width: 900px) 50vw, 270px" format="webp" quality={62} loading="lazy" /></li>
+        <li class="gphoto"><Image src={gPortrait} alt="Ibrahim Haïdara au cabinet" widths={[360, 560, 720]} sizes="(max-width: 900px) 50vw, 270px" format="webp" quality={62} loading="lazy" /></li>
+        <li class="gphoto"><Image src={gFamille} alt="Un accompagnement en famille" widths={[360, 560, 720]} sizes="(max-width: 900px) 50vw, 270px" format="webp" quality={62} loading="lazy" /></li>
+        <li class="gphoto"><Image src={gCabinet} alt="L'espace d'accueil du cabinet" widths={[360, 560, 720]} sizes="(max-width: 900px) 50vw, 270px" format="webp" quality={62} loading="lazy" /></li>
+        <li class="gphoto"><Image src={gEchange} alt="Un temps d'échange en consultation" widths={[360, 560, 720]} sizes="(max-width: 900px) 50vw, 270px" format="webp" quality={62} loading="lazy" /></li>
+        <li class="gphoto"><Image src={gGroupe} alt="Une consultation de groupe" widths={[360, 560, 720]} sizes="(max-width: 900px) 50vw, 270px" format="webp" quality={62} loading="lazy" /></li>
+        <li class="gphoto"><Image src={gEquipe} alt="L'équipe et les proches du cabinet" widths={[360, 560, 720]} sizes="(max-width: 900px) 50vw, 270px" format="webp" quality={62} loading="lazy" /></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ========================== PARTENAIRES ========================== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Ils m’ont fait confiance</p>
+        <h2 class="display">Institutions & organisations</h2>
+      </div>
+      <Partners />
+    </div>
+  </section>
+
+  <!-- ============================== CTA ============================== -->
+  <section class="section">
+    <div class="container">
+      <div class="cta" data-reveal>
+        <Image class="cta__bg" src={ctaLumiere} alt="" widths={[768, 1200, 1600]} sizes="(max-width: 1152px) 100vw, 1104px" format="webp" quality={60} loading="lazy" />
+        <div class="cta__scrim" aria-hidden="true"></div>
+        <div class="cta__content">
+          <h2 class="display cta__title">Et si vous en parliez ?</h2>
+          <p>Votre 1ʳᵉ consultation vous permettra de faire d’autres pas et de ne plus vous sentir seul(e).</p>
+          <div class="cta__actions">
+            <a class="btn btn--primary" href="/contact/">Prendre rendez-vous</a>
+            <a class="btn btn--ghost" href={`tel:${site.contact.phoneHref}`}>{site.contact.phone}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ============================ HERO D'AMBIANCE ============================ */
+  .amb-hero {
+    position: relative; isolation: isolate; overflow: clip;
+    background: var(--hero-bg);
+    padding-block: clamp(3rem, 8vw, 6.5rem);
+  }
+  /* Texture fine (grain) pour éviter l'aplat, très discrète */
+  .amb-hero::before {
+    content: ''; position: absolute; inset: 0; z-index: -1; opacity: .5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  }
+  .amb-hero__aura { position: absolute; inset: -10%; z-index: -1; filter: blur(64px); }
+  .blob { position: absolute; display: block; border-radius: 50%; will-change: transform; }
+  .blob--1 { width: 44vw; max-width: 620px; aspect-ratio: 1; left: -6%; top: -12%;  background: radial-gradient(circle at 50% 50%, var(--hero-blob-1), transparent 68%); animation: drift1 22s ease-in-out infinite alternate; }
+  .blob--2 { width: 40vw; max-width: 560px; aspect-ratio: 1; right: -8%; top: 4%;    background: radial-gradient(circle at 50% 50%, var(--hero-blob-2), transparent 68%); animation: drift2 26s ease-in-out infinite alternate; }
+  .blob--3 { width: 36vw; max-width: 520px; aspect-ratio: 1; left: 32%;  bottom: -22%; background: radial-gradient(circle at 50% 50%, var(--hero-blob-3), transparent 70%); animation: drift3 30s ease-in-out infinite alternate; }
+  @keyframes drift1 { from { transform: translate3d(0,0,0) scale(1); } to { transform: translate3d(6%, 5%, 0) scale(1.12); } }
+  @keyframes drift2 { from { transform: translate3d(0,0,0) scale(1.05); } to { transform: translate3d(-5%, 6%, 0) scale(.95); } }
+  @keyframes drift3 { from { transform: translate3d(0,0,0) scale(1); } to { transform: translate3d(4%, -6%, 0) scale(1.1); } }
+  @media (prefers-reduced-motion: reduce) { .blob { animation: none !important; } }
+
+  /* Fondu vers le contenu suivant */
+  .amb-hero__fade { position: absolute; left: 0; right: 0; bottom: 0; height: 90px; z-index: -1;
+    background: linear-gradient(to bottom, transparent, var(--color-bg)); }
+
+  .amb-hero__inner {
+    display: grid; grid-template-columns: 1.12fr .88fr; gap: clamp(2rem, 5vw, 4rem);
+    align-items: center;
+  }
+  .amb-hero__eyebrow { color: var(--color-accent); }
+  .amb-hero__title {
+    color: var(--hero-text); font-size: var(--fs-hero); line-height: 1.06;
+    margin-top: var(--space-3); max-width: 15ch;
+  }
+  .amb-hero__lead { color: var(--hero-text-muted); font-size: var(--fs-300); margin-top: var(--space-5); max-width: 52ch; }
+  .amb-hero__chips { margin-top: var(--space-6); }
+  .amb-hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-6); }
+
+  /* --- Carte « signature » du hero (sobre, verre dépoli) --- */
+  .hero-card {
+    position: relative; justify-self: center; width: min(100%, 400px);
+    background: var(--glass-bg); border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl); padding: var(--space-6);
+    box-shadow: var(--shadow-3);
+    backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  }
+  .hero-card__halo {
+    position: absolute; inset: -30% -10% auto -10%; height: 60%; z-index: -1; border-radius: 50%;
+    background: var(--color-primary-bright); filter: blur(54px); opacity: .28;
+  }
+  .hero-card__id { display: flex; align-items: center; gap: var(--space-3); }
+  .hero-card__avatar {
+    display: block; width: 60px; height: 60px; border-radius: 50%; overflow: hidden; flex: none;
+    border: 2px solid var(--color-bg); box-shadow: var(--shadow-1);
+  }
+  .hero-card__avatar img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 18%; }
+  .hero-card__idtext { display: grid; }
+  .hero-card__name { font-weight: 800; color: var(--color-text); }
+  .hero-card__role { font-size: var(--fs-100); color: var(--color-muted); }
+  .hero-card__quote {
+    font-family: var(--font-display); font-size: var(--fs-300); line-height: 1.5;
+    color: var(--color-text); margin-top: var(--space-4);
+  }
+  .hero-card__facts {
+    list-style: none; padding: var(--space-4) 0 0; margin-top: var(--space-4);
+    border-top: 1px solid var(--glass-border); display: grid; gap: var(--space-2);
+  }
+  .hero-card__facts li {
+    position: relative; padding-left: var(--space-5); color: var(--color-muted); font-size: var(--fs-100);
+  }
+  .hero-card__facts li::before {
+    content: ''; position: absolute; left: 0; top: .55em; width: .5rem; height: .5rem;
+    border-radius: 50%; background: var(--color-accent);
+  }
+
+  /* --- Portrait entier, petit et bien cadré, dans la bio --- */
+  .bio-portrait {
+    float: right; margin: 0 0 var(--space-4) var(--space-5);
+    width: clamp(140px, 32%, 220px); border-radius: var(--radius-lg); overflow: hidden;
+    border: 1px solid var(--color-border); box-shadow: var(--shadow-2); background: #fff;
+  }
+  .bio-portrait img { width: 100%; height: auto; display: block; }
+
+  /* ============================ ÉTAPES ============================ */
+  .steps { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-5); counter-reset: step; }
+  .step {
+    position: relative; background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg); padding: var(--space-6);
+  }
+  .step__num {
+    display: inline-grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%;
+    font-family: var(--font-display); font-weight: 700; font-size: var(--fs-400);
+    color: var(--color-on-primary); background: var(--color-primary); box-shadow: var(--shadow-1);
+  }
+  .step__title { margin-top: var(--space-4); font-size: var(--fs-400); }
+  .step__text { margin-top: var(--space-2); color: var(--color-muted); }
+
+  /* ============================ STATS ============================ */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); }
+  .stat { background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius); padding: var(--space-5); text-align: center; }
+  .stat__value { font-size: var(--fs-600); font-weight: 800; color: var(--color-primary); line-height: 1; }
+  .stat__label { color: var(--color-muted); font-size: var(--fs-100); margin-top: var(--space-2); }
+
+  /* ============================ PRÉSENTATION ============================ */
+  .bio-solo { max-width: 62ch; }
+  .bio-solo p { margin-top: var(--space-4); }
+  .bio-solo .btn { margin-top: var(--space-5); }
+
+  /* ============================ PUBLICS ============================ */
+  .publics { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-4); }
+  .public-card {
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-accent); border-radius: var(--radius);
+    padding: var(--space-5); box-shadow: var(--shadow-1);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .public-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-2); }
+  .public-card__name { font-size: var(--fs-400); color: var(--color-primary); }
+  .public-card__text { margin-top: var(--space-2); color: var(--color-muted); font-size: var(--fs-100); }
+
+  /* ============================ CTA (fond photo) ============================ */
+  .cta {
+    position: relative; isolation: isolate; overflow: hidden; text-align: center; color: #fff;
+    border-radius: var(--radius-xl); padding: clamp(2.5rem, 6vw, 4.5rem) var(--space-5);
+    box-shadow: var(--shadow-3);
+  }
+  .cta__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+  .cta__scrim { position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(180deg, rgba(9,20,42,.78), rgba(9,20,42,.68)); }
+  .cta__content { position: relative; }
+  .cta__title { color: #fff; }
+  .cta p { margin: var(--space-3) auto var(--space-6); color: rgba(255,255,255,.92); max-width: 46ch; }
+  .cta__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); justify-content: center; }
+
+  /* ============================ GALERIE ============================ */
+  .gallery-grid { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3); }
+  .gphoto { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-1); }
+  .gphoto img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 3 / 2; display: block; transition: transform .4s ease; }
+  .gphoto:hover img { transform: scale(1.06); }
+  .cta .btn--primary { background: #fff; color: var(--color-primary); box-shadow: none; }
+  .cta .btn--primary:hover { background: #eef4ff; transform: translateY(-1px); }
+  .cta .btn--ghost { background: transparent; border-color: rgba(255,255,255,.6); color: #fff; }
+  .cta .btn--ghost:hover { background: rgba(255,255,255,.12); border-color: #fff; color: #fff; }
+
+  /* ============================ ACCOMPAGNEMENT ============================ */
+  .feature { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem, 5vw, 4rem); align-items: center; }
+  .feature__media { margin: 0; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-3); }
+  .feature__media img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 3; display: block; }
+  .feature__body h2 { margin-top: var(--space-2); }
+  .feature__body > p { margin-top: var(--space-4); }
+  .feature__list { list-style: none; padding: 0; margin: var(--space-5) 0; display: grid; gap: var(--space-3); }
+  .feature__list li { position: relative; padding-left: var(--space-6); color: var(--color-muted); }
+  .feature__list li::before { content: '✓'; position: absolute; left: 0; color: var(--color-accent); font-weight: 800; }
+
+  /* ============================ RESPONSIVE ============================ */
+  @media (max-width: 960px) {
+    .amb-hero__inner { grid-template-columns: 1fr; }
+    .feature { grid-template-columns: 1fr; }
+    .feature__media { order: -1; }
+    .hero-card { width: 100%; max-width: 460px; justify-self: start; }
+    .steps { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .publics { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 460px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .publics { grid-template-columns: 1fr; }
+  }
+</style>

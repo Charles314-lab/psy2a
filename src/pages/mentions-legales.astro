@@ -1,0 +1,48 @@
+---
+/**
+ * Mentions légales.
+ * ⚠️ MODÈLE à faire valider par le Dr Haïdara / un juriste. Les champs
+ * [À COMPLÉTER] doivent être renseignés avant mise en ligne.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config/site';
+import Hero from '../components/Hero.astro';
+---
+
+<BaseLayout
+  title="Mentions légales"
+  description="Mentions légales du site du cabinet de psychologie PSY2A."
+>
+  <Hero title="Mentions légales" compact />
+  <section class="section">
+    <div class="container prose">
+      <h2>Éditeur du site</h2>
+      <p>
+        Entreprise individuelle <strong>PSY2A</strong>, {site.practitionerName}, {site.practitionerTitle}.<br />
+        Numéro RPPS : {site.registration.rpps}<br />
+        SIREN : {site.registration.siren} · SIRET : {site.registration.siret} · Code APE : {site.registration.ape}<br />
+        [À COMPLÉTER : adresse du siège]<br />
+        Téléphone : {site.contact.phone} · E-mail : {site.contact.email}
+      </p>
+
+      <h2>Directeur de la publication</h2>
+      <p>{site.practitionerName}<br />Psychologue<br />{site.practitionerTitle}</p>
+
+      <h2>Hébergement</h2>
+      <p>Ce site est hébergé par <strong>Bluehost</strong> (Newfold Digital Inc.), États-Unis. [À COMPLÉTER : adresse complète de l'hébergeur.]</p>
+
+      <h2>Propriété intellectuelle</h2>
+      <p>
+        L'ensemble des contenus (textes, images, logo) présents sur ce site est la propriété
+        du cabinet PSY2A, sauf mention contraire. Toute reproduction ou représentation, totale
+        ou partielle, sans autorisation écrite préalable, est interdite.
+      </p>
+
+      <h2>Données personnelles</h2>
+      <p>
+        Le traitement de vos données est décrit dans notre
+        <a href="/confidentialite/">politique de confidentialité</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

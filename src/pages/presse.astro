@@ -1,0 +1,92 @@
+---
+/**
+ * Page « Presse & TV », émissions TV/Radio du cabinet.
+ * Lecteurs vidéo « facade » privacy-first : aucune requête YouTube n'est faite
+ * au chargement. Au clic, on injecte une iframe youtube-nocookie (pas de cookie
+ * de traçage tant que l'utilisateur ne lance pas la lecture).
+ *
+ * ⚠️ Le mapping titre ↔ ID est « best-effort » (ordre du DOM d'origine) et
+ * mérite une vérification rapide sur la chaîne (voir content-source/emissions-tv.md).
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+
+// Liste resserrée après retour du Dr Haïdara (15/08) : seules les 4 vidéos qu'il a
+// explicitement conservées restent en ligne (les 18 autres ont été retirées à sa demande).
+const videos = [
+  { id: 'jrksTymB4QI', title: 'Le mal-être psychologique dans nos familles' },
+  { id: 'qy9a2kHgRaw', title: 'Émigration / Immigration / Migration' },
+  { id: 'bBqQ-nPATZY', title: "Les crises à l'adolescence" },
+  { id: 'MJMFQ-gZJEQ', title: "PSY2A : la psychologie, qu'en est-il au Mali ?" },
+];
+---
+
+<BaseLayout
+  title="Presse & TV"
+  description="Emissions TV d'Ibrahim Haïdara : psychologie, sante mentale et bien-etre."
+>
+  <Hero title="Presse & TV" compact />
+  <section class="section">
+    <div class="container">
+      <ul class="videos" role="list">
+        {videos.map((v) => (
+          <li class="video-card">
+            <button
+              class="video-card__btn"
+              type="button"
+              data-id={v.id}
+              aria-label={`Lire la vidéo : ${v.title}`}
+            >
+              <span class="video-card__play" aria-hidden="true">▶</span>
+              <span class="video-card__hint">Regarder</span>
+            </button>
+            <p class="video-card__title">{v.title}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .videos {
+    list-style: none; padding: 0; margin-top: var(--space-2);
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-5);
+  }
+  .video-card { min-width: 0; }
+  .video-card__btn, .video-card :global(iframe) {
+    display: block; width: 100%; aspect-ratio: 16 / 9; border: 0;
+    border-radius: var(--radius); overflow: hidden;
+  }
+  .video-card__btn {
+    position: relative; cursor: pointer; color: #fff;
+    background: linear-gradient(135deg, var(--color-primary), #0d2b63);
+    display: grid; place-content: center; gap: var(--space-2);
+  }
+  .video-card__btn:hover { filter: brightness(1.08); }
+  .video-card__play {
+    width: 54px; height: 54px; border-radius: 50%;
+    background: rgba(255,255,255,.18); display: inline-flex; align-items: center; justify-content: center;
+    font-size: 1.25rem; margin-inline: auto;
+  }
+  .video-card__hint { font-size: var(--fs-100); font-weight: 700; letter-spacing: .04em; }
+  .video-card__title { margin-top: var(--space-3); font-weight: 600; font-size: var(--fs-100); overflow-wrap: anywhere; }
+</style>
+
+<script>
+  // Facade → au clic, on charge la vidéo (youtube-nocookie, sans cookie de suivi
+  // tant que l'utilisateur ne lance pas la lecture).
+  document.querySelectorAll('.video-card__btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-id');
+      if (!id) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+      iframe.title = btn.getAttribute('aria-label') || 'Vidéo PSY2A';
+      iframe.loading = 'lazy';
+      iframe.setAttribute('allow', 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture');
+      iframe.setAttribute('allowfullscreen', '');
+      btn.replaceWith(iframe);
+    });
+  });
+</script>

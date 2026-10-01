@@ -1,0 +1,265 @@
+---
+/**
+ * Page « Contact » : coordonnées + formulaire moderne.
+ * v1 statique : le formulaire compose un e-mail pré-rempli (mailto) vers le
+ * secrétariat. La phase 2 branchera un endpoint serverless (anti-spam + accusé).
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config/site';
+import Hero from '../components/Hero.astro';
+
+const wa = `https://wa.me/${site.contact.phoneHref.replace('+', '')}`;
+
+// Endpoint serverless optionnel : si défini (PUBLIC_CONTACT_ENDPOINT), le formulaire
+// poste en AJAX ; sinon il retombe sur un e-mail pré-rempli (mailto).
+const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? '';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contactez Ibrahim Haïdara : telephone, WhatsApp, e-mail et formulaire. Consultations en visio, sur rendez-vous, partout en France."
+>
+  <Hero
+    eyebrow="Contact"
+    title="Parlons de votre demande"
+    lead="Une question, un premier rendez-vous ? Écrivez-nous ou appelez-nous : une réponse vous est adressée sous 24 h."
+  />
+
+  <section class="section section--tight">
+    <div class="container contact-grid">
+      <!-- Formulaire -->
+      <div class="form-card">
+        <h2 class="display form-card__title">Envoyer un message</h2>
+        <p class="form-card__hint">Les champs marqués <span class="req">*</span> sont obligatoires.</p>
+
+        <form class="contact-form" id="contact-form" data-email={site.contact.email} data-endpoint={contactEndpoint} novalidate>
+          <div class="grid-2">
+            <div class="field">
+              <label for="prenom">Prénom <span class="req" aria-hidden="true">*</span></label>
+              <input id="prenom" name="prenom" type="text" required autocomplete="given-name" placeholder="Votre prénom" />
+            </div>
+            <div class="field">
+              <label for="nom">Nom <span class="req" aria-hidden="true">*</span></label>
+              <input id="nom" name="nom" type="text" required autocomplete="family-name" placeholder="Votre nom" />
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label for="email">Adresse e-mail <span class="req" aria-hidden="true">*</span></label>
+              <input id="email" name="email" type="email" required autocomplete="email" placeholder="Votre e-mail" />
+            </div>
+            <div class="field">
+              <label for="tel">Téléphone</label>
+              <input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="Votre numéro de téléphone" />
+            </div>
+          </div>
+          <div class="grid-2">
+            <div class="field">
+              <label for="motif">Motif de la demande</label>
+              <input id="motif" name="motif" type="text" placeholder="Facultatif" />
+            </div>
+            <div class="field">
+              <label for="age">Tranche d'âge</label>
+              <select id="age" name="age">
+                <option value="">Facultatif</option>
+                <option value="enfant">Enfant</option>
+                <option value="adolescent">Adolescent</option>
+                <option value="adulte">Adulte</option>
+                <option value="couple">Couple</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="creneau">Créneau souhaité</label>
+            <input id="creneau" name="creneau" type="text" placeholder="Facultatif : matin, après-midi, soir…" />
+          </div>
+          <div class="field">
+            <label for="message">Votre message <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="message" name="message" rows="5" required maxlength="1000" placeholder="Décrivez brièvement votre demande…"></textarea>
+          </div>
+          <!-- Honeypot anti-spam : invisible pour les humains, piège à bots. -->
+          <div class="hp" aria-hidden="true">
+            <label>Ne pas remplir ce champ
+              <input type="text" name="website" tabindex="-1" autocomplete="off" />
+            </label>
+          </div>
+          <div class="form-foot">
+            <button class="btn btn--primary" type="submit">Envoyer le message</button>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </div>
+          <p class="form-privacy">Vos informations restent confidentielles et ne servent qu'à traiter votre demande.</p>
+        </form>
+      </div>
+
+      <!-- Coordonnées -->
+      <aside class="info-card">
+        <h2 class="display info-card__title">Coordonnées</h2>
+        <ul class="contact-list">
+          <li>
+            <span class="contact-list__ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8 9.6a16 16 0 0 0 6 6l1.2-1.1a2 2 0 0 1 2.1-.5c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg>
+            </span>
+            <span class="contact-list__body">
+              <span class="contact-list__k">Téléphone</span>
+              <a href={`tel:${site.contact.phoneHref}`}>{site.contact.phone}</a>
+            </span>
+          </li>
+          <li>
+            <span class="contact-list__ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-12.3 7.4L3 21l2.1-5.7A8.5 8.5 0 1 1 21 11.5z"/></svg>
+            </span>
+            <span class="contact-list__body">
+              <span class="contact-list__k">WhatsApp</span>
+              <a href={wa} target="_blank" rel="noopener noreferrer">Écrire sur WhatsApp</a>
+            </span>
+          </li>
+          <li>
+            <span class="contact-list__ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            </span>
+            <span class="contact-list__body">
+              <span class="contact-list__k">E-mail</span>
+              <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+            </span>
+          </li>
+          <li>
+            <span class="contact-list__ic" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            </span>
+            <span class="contact-list__body">
+              <span class="contact-list__k">Consultations</span>
+              <span class="contact-list__v">{site.hours}</span>
+            </span>
+          </li>
+        </ul>
+
+        <div class="info-card__note">
+          <strong>Sur rendez-vous uniquement.</strong> Les consultations se déroulent en visio, partout en France.
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-grid {
+    display: grid; grid-template-columns: 1.35fr .9fr; gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: start;
+  }
+
+  /* --- Carte formulaire --- */
+  .form-card {
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg); padding: clamp(1.5rem, 4vw, 2.5rem); box-shadow: var(--shadow-1);
+  }
+  .form-card__title { font-size: var(--fs-500); }
+  .form-card__hint { color: var(--color-muted); font-size: var(--fs-100); margin-top: var(--space-2); margin-bottom: var(--space-5); }
+  .req { color: var(--color-danger); }
+
+  .contact-form { display: grid; gap: var(--space-4); min-width: 0; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); min-width: 0; }
+  .field { display: grid; gap: var(--space-2); min-width: 0; }
+  .field label { font-weight: 600; font-size: var(--fs-100); }
+  .field input, .field select, .field textarea {
+    font: inherit; color: var(--color-text); background: var(--color-bg);
+    border: 1px solid var(--color-border); border-radius: var(--radius);
+    padding: .85rem 1rem; width: 100%; min-width: 0;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+  .field input::placeholder, .field textarea::placeholder { color: var(--color-muted); opacity: .7; }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none; border-color: var(--color-primary);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 18%, transparent);
+  }
+  .field textarea { resize: vertical; }
+
+  .form-foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-4); margin-top: var(--space-2); }
+  .form-foot .btn { min-width: 12rem; }
+  .form-status { color: var(--color-primary); font-size: var(--fs-100); min-height: 1.2em; margin: 0; }
+  .form-privacy { color: var(--color-muted); font-size: var(--fs-100); margin-top: var(--space-1); }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  /* --- Carte coordonnées --- */
+  .info-card {
+    background: var(--color-primary); color: #fff; border-radius: var(--radius-lg);
+    padding: clamp(1.5rem, 4vw, 2.25rem); box-shadow: var(--shadow-2);
+  }
+  .info-card__title { color: #fff; font-size: var(--fs-500); }
+  .contact-list { list-style: none; padding: 0; margin: var(--space-5) 0 0; display: grid; gap: var(--space-5); }
+  .contact-list li { display: flex; gap: var(--space-3); align-items: flex-start; }
+  .contact-list__ic {
+    flex: none; display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: 50%;
+    background: rgba(255,255,255,.16);
+  }
+  .contact-list__ic svg { width: 1.15rem; height: 1.15rem; }
+  .contact-list__body { display: grid; gap: 2px; min-width: 0; }
+  .contact-list__k { font-size: var(--fs-100); font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: rgba(255,255,255,.8); }
+  .contact-list__body a, .contact-list__v { color: #fff; overflow-wrap: anywhere; }
+  .contact-list__body a { text-decoration: none; font-weight: 600; }
+  .contact-list__body a:hover { text-decoration: underline; }
+  .contact-list__v { font-size: var(--fs-100); color: rgba(255,255,255,.92); }
+  .info-card__note {
+    margin-top: var(--space-6); padding-top: var(--space-5);
+    border-top: 1px solid rgba(255,255,255,.22); font-size: var(--fs-100); color: rgba(255,255,255,.92);
+  }
+
+  @media (max-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 480px) {
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('form-status');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    // Honeypot : si ce champ caché est rempli, c'est un bot → on ignore silencieusement.
+    const hp = form.querySelector('input[name="website"]') as HTMLInputElement | null;
+    if (hp && hp.value) return;
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    const data = new FormData(form);
+    data.delete('website');
+    const endpoint = form.dataset.endpoint;
+
+    // 1) Endpoint serverless configuré → envoi AJAX (validation + anti-spam côté serveur).
+    if (endpoint) {
+      try {
+        if (status) status.textContent = 'Envoi en cours…';
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { Accept: 'application/json' },
+          body: data,
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        form.reset();
+        if (status) status.textContent = 'Merci ! Votre message a bien été envoyé.';
+      } catch (_) {
+        if (status) status.textContent = "Échec de l'envoi. Merci de nous appeler ou de nous écrire sur WhatsApp.";
+      }
+      return;
+    }
+
+    // 2) Pas de backend (v1) → e-mail pré-rempli vers le secrétariat.
+    const email = form.dataset.email || 'contact@psy2a.com';
+    const subject = `Demande de contact, ${data.get('prenom')} ${data.get('nom')}`;
+    const body =
+      `Nom : ${data.get('prenom')} ${data.get('nom')}\n` +
+      `E-mail : ${data.get('email')}\n` +
+      `Téléphone : ${data.get('tel') || '(non renseigné)'}\n` +
+      `Motif : ${data.get('motif') || '(non renseigné)'}\n` +
+      `Tranche d'âge : ${data.get('age') || '(non renseignée)'}\n` +
+      `Créneau souhaité : ${data.get('creneau') || '(non renseigné)'}\n\n` +
+      `${data.get('message')}`;
+    window.location.href =
+      `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    if (status) {
+      status.textContent =
+        "Votre logiciel de messagerie va s'ouvrir pour finaliser l'envoi. Vous pouvez aussi nous appeler ou nous écrire sur WhatsApp.";
+    }
+  });
+</script>

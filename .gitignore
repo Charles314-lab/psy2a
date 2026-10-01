@@ -1,0 +1,17 @@
+# Dépendances
+node_modules/
+
+# Build Astro
+dist/
+.astro/
+
+# Environnement / secrets — NE JAMAIS committer
+.env
+.env.*
+!.env.example
+
+# Logs & divers
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db

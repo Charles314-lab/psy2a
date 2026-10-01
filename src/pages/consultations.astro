@@ -1,0 +1,193 @@
+---
+/**
+ * Page « Consultations » : modalités de la téléconsultation psychologique.
+ * Recentrée sur la visioconsultation (France) : déroulé d'une séance, formats,
+ * conditions pratiques et prise de rendez-vous.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../config/site';
+import { Image } from 'astro:assets';
+import Hero from '../components/Hero.astro';
+import heroImg from '../assets/photos/visio.jpg';
+import ctaImg from '../assets/photos/ponton.jpg';
+
+// Formats de consultation proposés.
+const formats = [
+  { title: 'En individuel', note: 'Un suivi personnel, à votre rythme.' },
+  { title: 'En couple', note: 'Renouer le dialogue, dénouer les conflits.' },
+  { title: 'En famille', note: 'Avec vos enfants ou vos adolescents.' },
+  { title: 'Accompagnement sur le plan professionnel', note: 'Prévention des risques psychosociaux, soutien à la mobilité professionnelle.' },
+];
+
+// Déroulé d'une séance (réassurance).
+const steps = [
+  { title: 'Un cadre confidentiel', text: 'Un temps réservé uniquement pour vous, protégé par le secret professionnel.' },
+  { title: '45 min ou +', text: 'À votre convenance.' },
+  { title: 'Pratique, depuis chez vous', text: 'À partir de votre téléphone ou ordinateur. Rien à installer.' },
+];
+
+// Conditions pratiques.
+const infos = [
+  { k: 'Ponctualité', v: 'Le créneau réservé vous est entièrement dédié : merci d’être à l’heure.' },
+  { k: 'Annulation', v: 'Prévenez au plus tard 24 h avant. Passé ce délai, la séance est due.' },
+  { k: 'Tarifs', v: 'Honoraires libres, variant de 50 € à 80 € la séance.' },
+  { k: 'Réponse', v: 'Une réponse vous est adressée en moins de 24 heures.' },
+];
+---
+
+<BaseLayout
+  title="Consultations"
+  description="Consultations psychologiques en visioconsultation avec Ibrahim Haïdara : seances individuelles, de couple, familiales et en entreprise, partout en France."
+>
+  <Hero
+    eyebrow="Consultations"
+    title="Consultations en ligne. Confidentialité assurée via des liens sécurisés"
+    lead="Prise en charge et accompagnement assurés en ligne, où que vous soyez."
+    image={heroImg}
+  >
+    <a class="btn btn--primary" href="/contact/">Prise de rendez-vous</a>
+    <a class="btn btn--ghost" href="#formats">Voir les formats</a>
+  </Hero>
+
+  <!-- Intro -->
+  <section class="section section--tight">
+    <div class="container measure">
+      <p class="lead-p">
+        Je vous accueille et vous accompagne tout au long d'un processus de soutien
+        psychologique, dans un cadre d'échanges sereins et de confiance mutuelle. L'objectif :
+        une prise en charge efficace, respectueuse de votre rythme.
+      </p>
+    </div>
+  </section>
+
+  <!-- Déroulé d'une séance -->
+  <section class="section section--surface">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Comment se déroule une séance</p>
+        <h2 class="display">Un temps pour vous, rien que pour vous</h2>
+      </div>
+      <ul class="cards cards--3" role="list" data-reveal>
+        {steps.map((s) => (
+          <li class="card">
+            <h3 class="card__title">{s.title}</h3>
+            <p class="card__text">{s.text}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Formats -->
+  <section class="section" id="formats">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Plusieurs formats</p>
+        <h2 class="display">La consultation qui vous correspond</h2>
+      </div>
+      <ul class="cards cards--4" role="list" data-reveal>
+        {formats.map((f) => (
+          <li class="card card--accent">
+            <h3 class="card__title">{f.title}</h3>
+            <p class="card__text">{f.note}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Bon à savoir -->
+  <section class="section section--surface">
+    <div class="container info-grid">
+      <div class="info-grid__head">
+        <p class="eyebrow">Bon à savoir</p>
+        <h2 class="display">Conditions pratiques</h2>
+        <p class="info-grid__hours">
+          <strong>Horaires :</strong> {site.hours}.
+        </p>
+      </div>
+      <dl class="infos" data-reveal>
+        {infos.map((i) => (
+          <div class="info">
+            <dt>{i.k}</dt>
+            <dd>{i.v}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- Prise de RDV -->
+  <section class="section">
+    <div class="container">
+      <div class="cta-band" data-reveal>
+        <Image class="cta-band__bg" src={ctaImg} alt="" widths={[768, 1200, 1600]} sizes="(max-width: 1152px) 100vw, 1104px" format="webp" quality={60} loading="lazy" />
+        <div class="cta-band__scrim" aria-hidden="true"></div>
+        <div class="cta-band__inner">
+          <div>
+            <h2 class="display">Prendre rendez-vous</h2>
+            <p>Que ce soit par appel direct ou via WhatsApp, un créneau vous sera réservé.</p>
+          </div>
+          <div class="cta-band__actions">
+            <a class="btn btn--primary" href="/contact/">Nous contacter</a>
+            <a class="btn btn--ghost" href={`tel:${site.contact.phoneHref}`}>{site.contact.phone}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .measure { max-width: 62ch; }
+  .lead-p { font-size: var(--fs-300); color: var(--color-text); }
+
+  /* Grilles de cartes réutilisables */
+  .cards { list-style: none; padding: 0; display: grid; gap: var(--space-4); }
+  .cards--3 { grid-template-columns: repeat(3, 1fr); }
+  .cards--4 { grid-template-columns: repeat(4, 1fr); }
+  .card {
+    background: var(--color-bg); border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg); padding: var(--space-6);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .card--accent { border-top: 3px solid var(--color-accent); }
+  .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-2); }
+  .card__title { font-size: var(--fs-400); color: var(--color-primary); }
+  .card__text { margin-top: var(--space-3); color: var(--color-muted); }
+
+  /* Bon à savoir : titre à gauche, définitions à droite */
+  .info-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+  .info-grid__hours { margin-top: var(--space-4); color: var(--color-muted); font-size: var(--fs-100); }
+  .infos { display: grid; gap: var(--space-5); margin: 0; }
+  .info { border-left: 3px solid var(--color-accent); padding-left: var(--space-4); }
+  .info dt { font-weight: 800; }
+  .info dd { margin: var(--space-1) 0 0; color: var(--color-muted); }
+
+  /* Bandeau CTA horizontal, fond photo */
+  .cta-band {
+    position: relative; isolation: isolate; overflow: hidden; color: #fff;
+    border-radius: var(--radius-xl); padding: clamp(2rem, 4vw, 3rem); box-shadow: var(--shadow-3);
+  }
+  .cta-band__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+  .cta-band__scrim { position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(90deg, rgba(9,20,42,.86), rgba(9,20,42,.62)); }
+  .cta-band__inner {
+    display: flex; flex-wrap: wrap; gap: var(--space-5); align-items: center; justify-content: space-between;
+  }
+  .cta-band h2 { color: #fff; }
+  .cta-band p { color: rgba(255,255,255,.92); margin-top: var(--space-2); }
+  .cta-band__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+  .cta-band .btn--primary { background: #fff; color: var(--color-primary); box-shadow: none; }
+  .cta-band .btn--primary:hover { background: #eef4ff; }
+  .cta-band .btn--ghost { background: transparent; border-color: rgba(255,255,255,.6); color: #fff; }
+  .cta-band .btn--ghost:hover { background: rgba(255,255,255,.12); border-color: #fff; color: #fff; }
+
+  @media (max-width: 900px) {
+    .cards--3, .cards--4 { grid-template-columns: repeat(2, 1fr); }
+    .info-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .cards--3, .cards--4 { grid-template-columns: 1fr; }
+  }
+</style>

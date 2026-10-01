@@ -1,0 +1,120 @@
+---
+/**
+ * Hero de page interne : photo de fond du domaine recouverte d'un voile dégradé
+ * de marque (bleu -> teal -> vert) qui garantit la lisibilité du texte blanc.
+ * Sans photo : dégradé de marque seul + aurores. Cohérent avec l'identité et
+ * distinct du hero clair de la page d'accueil.
+ *
+ * Props :
+ *  - eyebrow : sur-titre court (catégorie de page)
+ *  - title   : titre principal (h1)
+ *  - lead    : phrase d'accroche
+ *  - image   : photo de fond optionnelle (import astro:assets)
+ *  - align   : 'left' (défaut) ou 'center'
+ *  - compact : version basse (pages secondaires)
+ *  - slot    : actions optionnelles (boutons)
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  image?: ImageMetadata;
+  align?: 'left' | 'center';
+  compact?: boolean;
+}
+
+const { eyebrow, title, lead, image, align = 'left', compact = false } = Astro.props;
+const hasActions = Astro.slots.has('default');
+---
+
+<section class:list={['phero', align === 'center' && 'phero--center', compact && 'phero--compact', image ? 'phero--photo' : 'phero--plain']}>
+  {image && (
+    <div class="phero__photo" data-parallax>
+      <Image src={image} alt="" widths={[768, 1280, 1920]} sizes="100vw" format="webp" quality={58} loading="eager" />
+    </div>
+  )}
+  <div class="phero__scrim" aria-hidden="true"></div>
+  {!image && (
+    <div class="phero__deco" aria-hidden="true">
+      <span class="phero__blob phero__blob--a"></span>
+      <span class="phero__blob phero__blob--b"></span>
+    </div>
+  )}
+  <div class="container">
+    <div class="phero__inner" data-reveal>
+      {eyebrow && <p class="phero__eyebrow">{eyebrow}</p>}
+      <h1 class="display phero__title">{title}</h1>
+      {lead && <p class="phero__lead">{lead}</p>}
+      {hasActions && <div class="phero__actions"><slot /></div>}
+    </div>
+  </div>
+</section>
+
+<style>
+  .phero {
+    position: relative; isolation: isolate; overflow: clip; color: #fff;
+    padding-block: clamp(3.5rem, 8vw, 6rem);
+  }
+  .phero--compact { padding-block: clamp(2.25rem, 4.5vw, 3.25rem); }
+  .phero--plain { background: var(--grad-brand); }
+
+  /* Photo de fond */
+  .phero__photo { position: absolute; inset: 0; z-index: -3; }
+  .phero__photo :global(img) { width: 100%; height: 100%; object-fit: cover; }
+
+  /* Assombrissement navy uni : foncé à gauche (sous le texte) -> translucide à droite,
+     une seule teinte pour laisser respirer la photo (moins de « dégradé de marque »). */
+  .phero--photo .phero__scrim {
+    position: absolute; inset: 0; z-index: -2;
+    background: linear-gradient(90deg, rgba(9,20,42,.90) 0%, rgba(9,20,42,.72) 45%, rgba(9,20,42,.42) 100%);
+  }
+  /* Léger renfort en bas pour le fondu vers le contenu */
+  .phero--photo::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 40%; z-index: -2;
+    background: linear-gradient(to top, rgba(8,18,40,.45), transparent);
+  }
+
+  /* Motif de points discret (les deux variantes) */
+  .phero::before {
+    content: ''; position: absolute; inset: 0; z-index: -1; opacity: .4; pointer-events: none;
+    background-image: radial-gradient(rgba(255,255,255,.13) 1px, transparent 1.4px);
+    background-size: 22px 22px;
+    -webkit-mask-image: linear-gradient(105deg, #000, transparent 55%);
+    mask-image: linear-gradient(105deg, #000, transparent 55%);
+  }
+
+  /* Aurores (uniquement sans photo) */
+  .phero__deco { position: absolute; inset: -30% -10%; z-index: -1; filter: blur(60px); }
+  .phero__blob { position: absolute; display: block; border-radius: 50%; will-change: transform; }
+  .phero__blob--a { width: 32vw; max-width: 440px; aspect-ratio: 1; right: 2%; top: -34%;
+    background: radial-gradient(circle at 50% 50%, rgba(120,225,190,.60), transparent 66%);
+    animation: pdrift1 22s ease-in-out infinite alternate; }
+  .phero__blob--b { width: 30vw; max-width: 420px; aspect-ratio: 1; left: -4%; bottom: -46%;
+    background: radial-gradient(circle at 50% 50%, rgba(120,180,255,.55), transparent 66%);
+    animation: pdrift2 26s ease-in-out infinite alternate; }
+  @keyframes pdrift1 { from { transform: translate3d(0,0,0) scale(1); } to { transform: translate3d(-5%, 8%, 0) scale(1.14); } }
+  @keyframes pdrift2 { from { transform: translate3d(0,0,0) scale(1.05); } to { transform: translate3d(6%, -6%, 0) scale(.94); } }
+  @media (prefers-reduced-motion: reduce) { .phero__blob { animation: none !important; } }
+
+  .phero__inner { position: relative; max-width: 58ch; }
+  .phero--center .phero__inner { margin-inline: auto; text-align: center; max-width: 64ch; }
+  .phero__eyebrow {
+    display: inline-block; font-size: var(--fs-100); font-weight: 800; letter-spacing: .12em;
+    text-transform: uppercase; color: rgba(255,255,255,.9); margin-bottom: var(--space-3);
+    text-shadow: 0 1px 12px rgba(0,0,0,.25);
+  }
+  .phero__title { color: #fff; font-size: var(--fs-hero); line-height: 1.08; text-shadow: 0 2px 20px rgba(0,0,0,.28); }
+  .phero__lead { color: rgba(255,255,255,.94); font-size: var(--fs-300); margin-top: var(--space-4); max-width: 54ch; text-shadow: 0 1px 14px rgba(0,0,0,.28); }
+  .phero--center .phero__lead { margin-inline: auto; }
+  .phero__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-6); }
+  .phero--center .phero__actions { justify-content: center; }
+
+  /* Boutons adaptés au fond (contenu projeté via slot -> :global) */
+  .phero :global(.btn--primary) { background: #fff; color: var(--color-primary); box-shadow: 0 10px 24px -10px rgba(0,0,0,.5); }
+  .phero :global(.btn--primary:hover) { background: #eef4ff; transform: translateY(-1px); }
+  .phero :global(.btn--ghost) { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.65); color: #fff; }
+  .phero :global(.btn--ghost:hover) { background: rgba(255,255,255,.18); border-color: #fff; color: #fff; }
+</style>

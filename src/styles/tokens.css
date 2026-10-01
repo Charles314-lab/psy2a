@@ -1,0 +1,139 @@
+/* =========================================================================
+   Design tokens, PSY2A
+   Charte alignée sur le nouveau logo « Mind Able Yes » : bleu royal + vert.
+   Palette pensée pour une téléconsultation psychologique : calme, humaine,
+   rassurante. Contrastes vérifiés pour viser WCAG AA. Clair par défaut, sombre géré.
+   ========================================================================= */
+:root {
+  /* --- Couleurs de marque, thème clair --- */
+  --color-bg: #ffffff;
+  --color-surface: #f4f8fd;          /* fond secondaire, bleu très pâle */
+  --color-surface-2: #e8f1fb;        /* cartes en relief */
+  --color-text: #14233c;             /* bleu nuit, texte principal */
+  --color-muted: #536178;            /* texte secondaire (AA sur blanc) */
+
+  --color-primary: #1b5cbf;          /* bleu royal du logo (assombri pour le contraste) */
+  --color-primary-hover: #143f8f;
+  --color-primary-bright: #2c85ea;   /* bleu clair du logo (accents, focus) */
+  --color-on-primary: #ffffff;
+
+  --color-accent: #0f8f66;           /* vert du logo (feuilles), assombri pour AA sur blanc */
+  --color-accent-hover: #0b6f4f;
+  --color-accent-soft: #e2f4ec;      /* fond de puce vert très pâle */
+  --color-on-accent: #ffffff;
+
+  --color-border: #dbe5f2;
+  --color-focus: #2c85ea;
+  --color-danger: #c62828;
+
+  /* --- Dégradés de marque (ambiance, boutons, halos) --- */
+  --grad-brand: linear-gradient(118deg, #1b5cbf 0%, #1577a6 48%, #0f8f66 100%);
+  --grad-brand-soft: linear-gradient(118deg, #2c85ea 0%, #16a37e 100%);
+  /* Ambiance de hero : aurores bleu/vert sur fond clair et aéré */
+  --hero-bg: #eef5fd;
+  --hero-blob-1: rgba(44, 133, 234, .55);   /* bleu clair */
+  --hero-blob-2: rgba(21, 163, 126, .48);   /* vert */
+  --hero-blob-3: rgba(27, 92, 191, .38);    /* bleu royal */
+  --hero-text: #14233c;
+  --hero-text-muted: #3f5170;
+  --glass-bg: rgba(255, 255, 255, .72);
+  --glass-border: rgba(27, 92, 191, .16);
+
+  /* --- Typographie, pile système (perf + vie privée : aucune requête externe) --- */
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif;
+  --fs-100: .875rem;
+  --fs-200: 1rem;
+  --fs-300: 1.125rem;
+  --fs-400: 1.375rem;
+  --fs-500: 1.75rem;
+  --fs-600: 2.25rem;
+  --fs-hero: clamp(2.5rem, 5.4vw, 4rem);
+  --lh-tight: 1.12;
+  --lh-normal: 1.65;
+
+  /* --- Espacements --- */
+  --space-1: .25rem; --space-2: .5rem;  --space-3: .75rem; --space-4: 1rem;
+  --space-5: 1.5rem; --space-6: 2rem;   --space-7: 3rem;   --space-8: 4rem;  --space-9: 6rem;
+
+  /* --- Rayons, ombres, layout --- */
+  --radius-sm: 8px;
+  --radius: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --shadow-1: 0 1px 3px rgba(19,35,63,.10), 0 1px 2px rgba(19,35,63,.06);
+  --shadow-2: 0 14px 32px rgba(19,35,63,.16);
+  --shadow-3: 0 30px 60px -20px rgba(15,58,120,.38);
+  --container: 72rem;
+  --header-h: 4.5rem;
+}
+
+/* Thème sombre : suit la préférence système, sauf si l'utilisateur force "light". */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --color-bg: #0b1322;
+    --color-surface: #111c30;
+    --color-surface-2: #182742;
+    --color-text: #e9eefa;
+    --color-muted: #a2b2cd;
+
+    --color-primary: #5b9bf0;
+    --color-primary-hover: #7cb1f6;
+    --color-primary-bright: #7cb1f6;
+    --color-on-primary: #08182f;
+
+    --color-accent: #3fc596;
+    --color-accent-hover: #63d6ae;
+    --color-accent-soft: #123a30;
+    --color-on-accent: #062018;
+
+    --color-border: #24344f;
+    --color-focus: #7cb1f6;
+    --color-danger: #ff6b61;
+
+    --grad-brand: linear-gradient(118deg, #2c85ea 0%, #1aa17a 100%);
+    --grad-brand-soft: linear-gradient(118deg, #5b9bf0 0%, #3fc596 100%);
+    --hero-bg: #0a1120;
+    --hero-blob-1: rgba(44, 133, 234, .40);
+    --hero-blob-2: rgba(26, 161, 122, .38);
+    --hero-blob-3: rgba(91, 155, 240, .30);
+    --hero-text: #f2f6ff;
+    --hero-text-muted: #b9c7e2;
+    --glass-bg: rgba(17, 28, 48, .62);
+    --glass-border: rgba(124, 177, 246, .22);
+  }
+}
+
+/* Thème forcé par l'utilisateur (bouton), prioritaire sur la préférence système. */
+:root[data-theme='dark'] {
+  --color-bg: #0b1322;
+  --color-surface: #111c30;
+  --color-surface-2: #182742;
+  --color-text: #e9eefa;
+  --color-muted: #a2b2cd;
+
+  --color-primary: #5b9bf0;
+  --color-primary-hover: #7cb1f6;
+  --color-primary-bright: #7cb1f6;
+  --color-on-primary: #08182f;
+
+  --color-accent: #3fc596;
+  --color-accent-hover: #63d6ae;
+  --color-accent-soft: #123a30;
+  --color-on-accent: #062018;
+
+  --color-border: #24344f;
+  --color-focus: #7cb1f6;
+  --color-danger: #ff6b61;
+
+  --grad-brand: linear-gradient(118deg, #2c85ea 0%, #1aa17a 100%);
+  --grad-brand-soft: linear-gradient(118deg, #5b9bf0 0%, #3fc596 100%);
+  --hero-bg: #0a1120;
+  --hero-blob-1: rgba(44, 133, 234, .40);
+  --hero-blob-2: rgba(26, 161, 122, .38);
+  --hero-blob-3: rgba(91, 155, 240, .30);
+  --hero-text: #f2f6ff;
+  --hero-text-muted: #b9c7e2;
+  --glass-bg: rgba(17, 28, 48, .62);
+  --glass-border: rgba(124, 177, 246, .22);
+}
