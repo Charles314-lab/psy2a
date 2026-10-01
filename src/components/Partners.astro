@@ -7,6 +7,9 @@ import care from '../assets/partners/care.png';
 import cicr from '../assets/partners/cicr.jpg';
 import suisse from '../assets/partners/suisse.jpg';
 import savethechildren from '../assets/partners/save-the-children.png';
+import adminPenit from '../assets/partners/admin-penitentiaire.png';
+import minJustice from '../assets/partners/ministere-justice.png';
+import ceaAlsace from '../assets/partners/cea-alsace.png';
 
 const maliPartners = [
   { img: care, name: 'CARE' },
@@ -19,9 +22,9 @@ const maliPartners = [
 ];
 
 const francePartners = [
-  'Administration penitentiaire de Seine-et-Marne',
-  'Protection Judiciaire de la Jeunesse (PJJ) de Haute-Vienne',
-  "Aide Sociale a l'Enfance (ASE) d'Alsace",
+  { img: adminPenit, name: 'Administration penitentiaire de Seine-et-Marne' },
+  { img: minJustice, name: 'Protection Judiciaire de la Jeunesse (PJJ) de Haute-Vienne' },
+  { img: ceaAlsace, name: "Aide Sociale a l'Enfance (ASE) d'Alsace" },
 ];
 ---
 
@@ -37,9 +40,9 @@ const francePartners = [
 
   <h3 class="partners__region">France</h3>
   <ul class="partners-grid" role="list">
-    {francePartners.map((name) => (
-      <li class="partner partner--text">
-        <span class="partner__name">{name}</span>
+    {francePartners.map((p) => (
+      <li class="partner">
+        <Image src={p.img} alt={p.name} title={p.name} widths={[140, 280]} sizes="150px" format="webp" loading="lazy" />
       </li>
     ))}
   </ul>
@@ -67,12 +70,4 @@ const francePartners = [
     transition: filter .2s ease, opacity .2s ease, transform .2s ease;
   }
   .partner:hover :global(img) { filter: grayscale(0); opacity: 1; transform: scale(1.05); }
-  .partner--text {
-    background: var(--color-surface); padding: var(--space-4) var(--space-5);
-    min-height: auto;
-  }
-  .partner__name {
-    font-weight: 600; font-size: var(--fs-100); color: var(--color-text);
-    text-align: center;
-  }
 </style>
