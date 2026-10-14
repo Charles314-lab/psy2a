@@ -40,6 +40,11 @@ export const site = {
     autorisation: "Autorisation d'exercice de psychologue (diplôme étranger), Agence Régionale de Santé",
   },
 
+  /** Prise de rendez-vous en ligne (plateforme Maiia, Cegedim Santé). */
+  booking: {
+    maiia: 'https://www.maiia.com/psychologue/67300-schiltigheim/haidara-ibrahim',
+  },
+
   social: {
     facebook: 'https://web.facebook.com/psy2a/',
     youtube: 'https://www.youtube.com/@psy2a1ercabinetdepsycholog43/videos',

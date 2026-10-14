@@ -18,7 +18,7 @@ const wa = `https://wa.me/${site.contact.phoneHref.replace('+', '')}`;
     <div class="site-footer__brand">
       <a class="foot-brand" href="/" aria-label="PSY2A, Accueil">
         <span class="foot-brand__mark"><Image src={mark} alt="" widths={[52, 104]} sizes="48px" format="webp" loading="lazy" /></span>
-        <span class="foot-brand__word">PSY2A<span class="foot-brand__sub"><span class="fb-l fb-l--m">M</span>.<span class="fb-l fb-l--a">A</span>.<span class="fb-l fb-l--y">Y</span>. <span class="fb-full">Maux · Aide · Yeux</span></span></span>
+        <span class="foot-brand__word">PSY2A<span class="foot-brand__sub"><span class="fb-l fb-l--m">M</span>.<span class="fb-l fb-l--a">A</span>.<span class="fb-l fb-l--y">Y</span>. <span class="fb-full">(Maux · Aide · Yeux)</span></span></span>
       </a>
       <p class="site-footer__blurb">
         Vos consultations à distance (enfants · ados · adultes · couples).
@@ -51,6 +51,7 @@ const wa = `https://wa.me/${site.contact.phoneHref.replace('+', '')}`;
         <li><a href={`tel:${site.contact.phoneHref}`}>{site.contact.phone}</a></li>
         <li><a href={wa} target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
         <li><a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></li>
+        <li><a href={site.booking.maiia} target="_blank" rel="noopener noreferrer">Rendez-vous sur Maiia</a></li>
       </ul>
     </div>
 
@@ -92,7 +93,7 @@ const wa = `https://wa.me/${site.contact.phoneHref.replace('+', '')}`;
   .foot-brand__mark { display: grid; place-items: center; height: 48px; width: 48px; flex: none; background: #fff; border-radius: 12px; padding: 5px; box-shadow: var(--shadow-1); }
   .foot-brand__mark img { height: 100%; width: auto; }
   .foot-brand__word { display: flex; flex-direction: column; line-height: 1; font-weight: 800; font-size: 1.35rem; color: var(--color-text); }
-  .foot-brand__sub { font-size: .58rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--color-muted); margin-top: 4px; }
+  .foot-brand__sub { font-size: .58rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--color-muted); margin-top: .6rem; line-height: 1.35; }
   .fb-l { font-weight: 800; }
   .fb-l--m { color: var(--color-primary); }
   .fb-l--a { color: var(--color-accent); }

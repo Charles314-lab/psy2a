@@ -5,8 +5,10 @@
  * secrétariat. La phase 2 branchera un endpoint serverless (anti-spam + accusé).
  */
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
 import { site } from '../config/site';
 import Hero from '../components/Hero.astro';
+import maiia from '../assets/maiia.png';
 
 const wa = `https://wa.me/${site.contact.phoneHref.replace('+', '')}`;
 
@@ -134,9 +136,27 @@ const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? '';
         </ul>
 
         <div class="info-card__note">
-          <strong>Sur rendez-vous uniquement.</strong> Les consultations se déroulent en visio, partout en France.
+          <strong>Sur rendez-vous uniquement.</strong> Les consultations se déroulent en visio,
+          partout en France où que vous soyez.
         </div>
       </aside>
+
+      <!-- Prise de rendez-vous en ligne via Maiia -->
+      <section class="booking" aria-labelledby="booking-title">
+        <div class="booking__logo">
+          <Image src={maiia} alt="Maiia" widths={[96, 192]} sizes="88px" format="webp" loading="lazy" />
+        </div>
+        <div class="booking__body">
+          <h2 class="display booking__title" id="booking-title">Prenez rendez-vous en ligne.</h2>
+          <p class="booking__text">
+            Choisissez directement votre créneau sur Maiia, la plateforme de rendez-vous
+            médicaux de Cegedim Santé. Confirmation immédiate.
+          </p>
+        </div>
+        <a class="btn btn--primary booking__cta" href={site.booking.maiia} target="_blank" rel="noopener noreferrer">
+          Réserver sur Maiia
+        </a>
+      </section>
     </div>
   </section>
 </BaseLayout>
@@ -203,8 +223,29 @@ const contactEndpoint = import.meta.env.PUBLIC_CONTACT_ENDPOINT ?? '';
     border-top: 1px solid rgba(255,255,255,.22); font-size: var(--fs-100); color: rgba(255,255,255,.92);
   }
 
+  /* --- Prise de rendez-vous en ligne (Maiia) --- */
+  .booking {
+    grid-column: 1 / -1;
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-5);
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-accent); border-radius: var(--radius-lg);
+    padding: clamp(1.25rem, 3vw, 2rem); box-shadow: var(--shadow-1);
+  }
+  .booking__logo {
+    flex: none; width: 88px; background: #fff; border-radius: var(--radius);
+    padding: var(--space-2); box-shadow: var(--shadow-1);
+  }
+  .booking__logo img { width: 100%; height: auto; display: block; }
+  .booking__body { flex: 1 1 18rem; min-width: 0; }
+  .booking__title { font-size: var(--fs-400); }
+  .booking__text { margin-top: var(--space-2); color: var(--color-muted); font-size: var(--fs-100); }
+  .booking__cta { flex: none; }
+
   @media (max-width: 900px) {
     .contact-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .booking__cta { width: 100%; }
   }
   @media (max-width: 480px) {
     .grid-2 { grid-template-columns: 1fr; }

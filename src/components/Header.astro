@@ -28,7 +28,7 @@ const isActive = (href: string) =>
       </span>
       <span class="brand__word">
         PSY2A
-        <span class="brand__sub"><span class="brand__letter brand__letter--m">M</span>.<span class="brand__letter brand__letter--a">A</span>.<span class="brand__letter brand__letter--y">Y</span>. <span class="brand__full">Maux · Aide · Yeux</span></span>
+        <span class="brand__sub"><span class="brand__letter brand__letter--m">M</span>.<span class="brand__letter brand__letter--a">A</span>.<span class="brand__letter brand__letter--y">Y</span>. <span class="brand__full">(Maux · Aide · Yeux)</span></span>
       </span>
     </a>
 
@@ -48,7 +48,7 @@ const isActive = (href: string) =>
           </li>
         ))}
       </ul>
-      <a class="btn btn--primary site-nav__cta" href="/contact/">Prendre rendez-vous</a>
+      <a class="btn btn--primary site-nav__cta" href="/contact/">Prenez rendez-vous.</a>
     </nav>
 
     <button class="theme-toggle" type="button" title="Basculer le thème clair / sombre">
@@ -89,7 +89,7 @@ const isActive = (href: string) =>
   }
   .brand__sub {
     font-size: .58rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
-    color: var(--color-muted); margin-top: 4px;
+    color: var(--color-muted); margin-top: .6rem; line-height: 1.35;
   }
   .brand__letter { font-weight: 800; }
   .brand__letter--m { color: var(--color-primary); }
@@ -120,6 +120,8 @@ const isActive = (href: string) =>
 
   /* --- Mobile --- */
   @media (max-width: 860px) {
+    /* Sur petit écran la ligne M.A.Y. se brisait en quatre : on la resserre pour la tenir sur une ligne. */
+    .brand__sub { font-size: .52rem; letter-spacing: .07em; white-space: nowrap; }
     .nav-toggle { display: inline-flex; order: 3; }
     .theme-toggle { order: 2; margin-left: auto; }
     .site-nav {
